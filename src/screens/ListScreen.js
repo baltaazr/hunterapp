@@ -1,10 +1,20 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { Text, FlatList } from 'react-native'
 
-export default () => (
-  <View>
-    <Text>LIST SCREEN</Text>
-  </View>
-)
+export default () => {
+  const friends = [
+    {
+      name: 'Bob'
+    }
+  ]
+
+  return (
+    <FlatList
+      keyExtractor={friend => friend.name}
+      data={friends}
+      renderItem={({ item }) => <Text>{item.name}</Text>}
+    />
+  )
+}
 
 // const styles = StyleSheet.create({})

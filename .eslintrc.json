@@ -33,6 +33,7 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "semi": "off",
-    "comma-dangle": "off"
+    "comma-dangle": "off",
+    "arrow-parens": "off"
   }
 }
