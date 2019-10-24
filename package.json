@@ -7,16 +7,51 @@
     "web": "expo start --web",
     "eject": "expo eject"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "{src}/**/*.{js,jsx}": [
+      "eslint --fix",
+      "stylelint --config=.stylelintrc --fix",
+      "pretty-quick --staged",
+      "git add"
+    ]
+  },
   "dependencies": {
+    "babel-eslint": "^10.0.3",
     "expo": "^35.0.0",
     "react": "16.8.3",
     "react-dom": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
-    "react-native-web": "^0.11.7"
+    "react-native-gesture-handler": "~1.3.0",
+    "react-native-reanimated": "~1.2.0",
+    "react-native-screens": "~1.0.0-alpha.23",
+    "react-native-web": "^0.11.7",
+    "react-navigation": "^4.0.10",
+    "react-navigation-stack": "^1.10.2"
   },
   "devDependencies": {
     "babel-preset-expo": "^7.1.0",
-    "husky": "^3.0.9"
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "husky": "^3.0.9",
+    "lint-staged": "^9.4.2",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^2.0.0",
+    "stylelint": "^11.1.1",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-config-standard": "^19.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-config-yoctol": "^2.0.0",
+    "stylelint-order": "^3.1.1",
+    "stylelint-processor-styled-components": "^1.8.0"
   },
   "private": true
 }
