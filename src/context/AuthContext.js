@@ -24,7 +24,7 @@ const tryLocalSignin = dispatch => async () => {
   const token = await AsyncStorage.getItem('token')
   if (token) {
     dispatch({ type: 'signin', payload: token })
-    navigate('TrackList')
+    navigate('HuntList')
   } else {
     navigate('Signup')
   }
@@ -40,7 +40,7 @@ const signup = dispatch => async ({ email, password }) => {
     await AsyncStorage.setItem('token', response.data.token)
     dispatch({ type: 'signin', payload: response.data.token })
 
-    navigate('TrackList')
+    navigate('HuntList')
   } catch (err) {
     dispatch({
       type: 'add_error',
@@ -54,7 +54,7 @@ const signin = dispatch => async ({ email, password }) => {
     const response = await hunterApi.post('/signin', { email, password })
     await AsyncStorage.setItem('token', response.data.token)
     dispatch({ type: 'signin', payload: response.data.token })
-    navigate('TrackList')
+    navigate('HuntList')
   } catch (err) {
     dispatch({
       type: 'add_error',
