@@ -6,12 +6,17 @@
   },
   "parser": "babel-eslint",
   "extends": "airbnb",
-  "plugins": ["react-hooks"],
+  "plugins": [
+    "react-hooks"
+  ],
   "rules": {
     "import/order": [
       2,
       {
-        "groups": ["parent", "sibling"],
+        "groups": [
+          "parent",
+          "sibling"
+        ],
         "newlines-between": "always"
       }
     ],
@@ -35,6 +40,8 @@
     "semi": "off",
     "comma-dangle": "off",
     "arrow-parens": "off",
-    "no-trailing-spaces": "off"
+    "no-trailing-spaces": "off",
+    "operator-linebreak": "off",
+    "space-before-function-paren": "off"
   }
 }
