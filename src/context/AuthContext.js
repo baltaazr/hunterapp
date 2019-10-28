@@ -1,4 +1,4 @@
-import trackerApi from '../api/tracker'
+import hunterApi from '../api/hunter'
 import { navigate } from '../utils/navigationRef'
 
 import createDataContext from './createDataContext'
@@ -36,7 +36,7 @@ const clearErrorMessage = dispatch => () => {
 
 const signup = dispatch => async ({ email, password }) => {
   try {
-    const response = await trackerApi.post('/signup', { email, password })
+    const response = await hunterApi.post('/signup', { email, password })
     await AsyncStorage.setItem('token', response.data.token)
     dispatch({ type: 'signin', payload: response.data.token })
 
@@ -51,7 +51,7 @@ const signup = dispatch => async ({ email, password }) => {
 
 const signin = dispatch => async ({ email, password }) => {
   try {
-    const response = await trackerApi.post('/signin', { email, password })
+    const response = await hunterApi.post('/signin', { email, password })
     await AsyncStorage.setItem('token', response.data.token)
     dispatch({ type: 'signin', payload: response.data.token })
     navigate('TrackList')
