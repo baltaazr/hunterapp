@@ -3,7 +3,7 @@ import AuthForm from '../components/AuthForm'
 import NavLink from '../components/NavLink'
 
 import React, { useContext } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Button } from 'react-native'
 import { NavigationEvents } from 'react-navigation'
 
 const styles = StyleSheet.create({
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const SignupScreen = () => {
+const SignupScreen = ({ navigation }) => {
   const { state, signup, clearErrorMessage } = useContext(AuthContext)
 
   return (
@@ -29,6 +29,12 @@ const SignupScreen = () => {
       <NavLink
         routeName="Signin"
         text="Already have an account? Sign in instead!"
+      />
+      <Button
+        title="test camera"
+        onPress={() => {
+          navigation.navigate('Camera')
+        }}
       />
     </View>
   )

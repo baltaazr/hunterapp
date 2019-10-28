@@ -20,13 +20,13 @@ const switchNavigator = createSwitchNavigator({
     Signin: SigninScreen
   }),
   mainFlow: createBottomTabNavigator({
-    HuntRecordFlow: createStackNavigator({
-      Camera: CameraScreen,
-      Form: FormScreen
-    }),
     HuntListFlow: createStackNavigator({
       HuntList: HuntListScreen,
       HuntDetail: HuntDetailScreen
+    }),
+    HuntRecordFlow: createStackNavigator({
+      Camera: CameraScreen,
+      Form: FormScreen
     }),
     Account: AccountScreen
   })
