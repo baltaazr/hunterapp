@@ -34,6 +34,8 @@
     "react-hooks/exhaustive-deps": "warn",
     "semi": "off",
     "comma-dangle": "off",
-    "arrow-parens": "off"
+    "arrow-parens": "off",
+    "operator-linebreak": "off",
+    "space-before-function-paren": "off"
   }
 }
