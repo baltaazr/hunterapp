@@ -1,6 +1,6 @@
 import { Context as AuthContext } from '../context/AuthContext'
-import AuthForm from '../components/AuthForm'
-import NavLink from '../components/NavLink'
+import AuthForm from '../components/authentication/SigninForm'
+import NavLink from '../components/utils/NavLink'
 
 import React, { useContext } from 'react'
 import { View, StyleSheet, Button } from 'react-native'

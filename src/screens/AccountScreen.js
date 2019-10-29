@@ -1,4 +1,4 @@
-import Spacer from '../components/Spacer'
+import Spacer from '../components/utils/Spacer'
 import { AuthContext } from '../context'
 
 import React, { useContext } from 'react'
