@@ -4,6 +4,7 @@ import {
   FormScreen,
   HuntDetailScreen,
   HuntListScreen,
+  ResolveAuthScreen,
   SigninScreen,
   SignupScreen
 } from './src/screens'
@@ -16,6 +17,7 @@ import { createStackNavigator } from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 
 const switchNavigator = createSwitchNavigator({
+  ResolveAuth: ResolveAuthScreen,
   loginFlow: createStackNavigator({
     Signup: SignupScreen,
     Signin: SigninScreen
