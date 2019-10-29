@@ -2,7 +2,7 @@ import InputBox from './InputBox'
 import SubmitButton from './SubmitButton'
 
 import React, { useState } from 'react'
-import { KeyboardAvoidingView, StyleSheet } from 'react-native'
+import { StyleSheet, KeyboardAvoidingView } from 'react-native'
 import { Text } from 'react-native-elements'
 import { Feather, Ionicons } from '@expo/vector-icons'
 
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     marginBottom: 20,
-    flex: 3
+    flex: 4
   },
   errorMessage: {
     fontSize: 16,
@@ -28,11 +28,19 @@ const styles = StyleSheet.create({
  */
 
 const SigninForm = ({ errorMessage, onSubmit, submitButtonText }) => {
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   return (
     <KeyboardAvoidingView style={styles.wrapper} behavior="padding">
+      <InputBox
+        label="姓名 Name"
+        placeholder="輸入密碼 Your Password"
+        input={name}
+        setInput={setName}
+        icon={<Ionicons name="ios-person" size={32} color="white" />}
+      />
       <InputBox
         label="電子郵件 Email"
         placeholder="輸入電子郵件 Your Email"
@@ -55,7 +63,7 @@ const SigninForm = ({ errorMessage, onSubmit, submitButtonText }) => {
         icon={
           <Ionicons name="ios-arrow-dropdown-circle" size={32} color="purple" />
         }
-        onPress={() => onSubmit({ email, password })}
+        onPress={() => onSubmit({ name, email, password })}
       />
     </KeyboardAvoidingView>
   )

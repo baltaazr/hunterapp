@@ -10,22 +10,24 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 80,
-    color: '#FFA967',
     marginTop: '10%',
     marginLeft: '20%'
   },
   subtitle: {
     fontSize: 30,
-    color: '#FFA967',
     alignSelf: 'flex-end',
     marginRight: '25%'
   }
 })
 
-const PageTitle = ({ title, subtitle }) => (
+const PageTitle = ({ title, subtitle, color, subtitleMarginRight = '25%' }) => (
   <View style={styles.wrapper}>
-    <Text style={styles.title}>{title}</Text>
-    <Text style={styles.subtitle}>{subtitle}</Text>
+    <Text style={{ ...styles.title, color }}>{title}</Text>
+    <Text
+      style={{ ...styles.subtitle, color, marginRight: subtitleMarginRight }}
+    >
+      {subtitle}
+    </Text>
   </View>
 )
 

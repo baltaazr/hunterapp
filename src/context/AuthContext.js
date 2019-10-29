@@ -27,7 +27,7 @@ const tryLocalSignin = dispatch => async () => {
 
     navigate('HuntList')
   } else {
-    navigate('Signin')
+    navigate('Signup')
   }
 }
 

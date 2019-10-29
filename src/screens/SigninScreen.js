@@ -1,4 +1,4 @@
-import { SigninForm, SigninTitle, GoToOther } from '../components'
+import { SigninForm, PageTitle, GoToOther } from '../components'
 import { Context } from '../context/AuthContext'
 
 import React, { useContext } from 'react'
@@ -28,7 +28,7 @@ const SigninScreen = () => {
         style={styles.background}
       >
         <NavigationEvents onWillBlur={clearErrorMessage} />
-        <SigninTitle title="獵訊" subtitle="HuntData" />
+        <PageTitle title="獵訊" subtitle="HuntData" color="#FFA967" />
         <SigninForm
           errorMessage={state.errorMessage}
           onSubmit={signin}
