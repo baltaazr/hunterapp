@@ -20,12 +20,12 @@ const SignupScreen = () => {
   const { state, signup, clearErrorMessage } = useContext(AuthContext)
 
   return (
-    <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
-      <ImageBackground
-        // eslint-disable-next-line global-require
-        source={require('../../assets/signup_background.png')}
-        style={styles.background}
-      >
+    <ImageBackground
+      // eslint-disable-next-line global-require
+      source={require('../../assets/signup_background.png')}
+      style={styles.background}
+    >
+      <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
         <NavigationEvents onWillBlur={clearErrorMessage} />
         <PageTitle
           title="註冊"
@@ -42,8 +42,8 @@ const SignupScreen = () => {
           text="已有帳號？ Already Have an Account?"
           routeName="Signin"
         />
-      </ImageBackground>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ImageBackground>
   )
 }
 

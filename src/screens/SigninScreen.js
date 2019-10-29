@@ -21,12 +21,12 @@ const SigninScreen = () => {
   const { state, signin, clearErrorMessage } = useContext(Context)
 
   return (
-    <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
-      <ImageBackground
-        // eslint-disable-next-line global-require
-        source={require('../../assets/signin_background.png')}
-        style={styles.background}
-      >
+    <ImageBackground
+      // eslint-disable-next-line global-require
+      source={require('../../assets/signin_background.png')}
+      style={styles.background}
+    >
+      <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
         <NavigationEvents onWillBlur={clearErrorMessage} />
         <PageTitle title="獵訊" subtitle="HuntData" color="#FFA967" />
         <SigninForm
@@ -35,8 +35,8 @@ const SigninScreen = () => {
           submitButtonText="登入 Sign In"
         />
         <GoToOther text="註冊 Create Account" routeName="Signup" />
-      </ImageBackground>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ImageBackground>
   )
 }
 
