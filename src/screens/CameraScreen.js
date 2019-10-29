@@ -1,5 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react'
+import { PictureContext } from '../context'
+
+import React, { useState, useEffect, useContext } from 'react'
 import { View, StyleSheet, Text, Button, Image } from 'react-native'
 import * as Permissions from 'expo-permissions'
 import { Camera } from 'expo-camera'
@@ -13,10 +15,13 @@ const styles = StyleSheet.create({
 
 let camera
 
-const CameraScreen = () => {
+const CameraScreen = ({ navigation }) => {
   const [perm, setPerm] = useState(null)
   const [focus, setFocus] = useState(true)
-  const [picture, setPicture] = useState(null)
+  const {
+    state: { picture },
+    setPicture
+  } = useContext(PictureContext)
 
   useEffect(() => {
     const askCameraPermission = async () => {
@@ -32,10 +37,8 @@ const CameraScreen = () => {
   }, [])
 
   const snap = async () => {
-    if (camera) {
-      const pic = await camera.takePictureAsync()
-      setPicture(pic)
-    }
+    const pic = await camera.takePictureAsync({ base64: true })
+    setPicture(pic)
   }
 
   return (
@@ -51,7 +54,12 @@ const CameraScreen = () => {
       {picture ? (
         <>
           <Image source={{ uri: picture.uri }} style={styles.picture} />
-          <Button title="Proceed" />
+          <Button
+            title="Proceed"
+            onPress={() => {
+              navigation.navigate('Form')
+            }}
+          />
         </>
       ) : perm === 'granted' && focus ? (
         <Camera

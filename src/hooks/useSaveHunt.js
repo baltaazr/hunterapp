@@ -11,7 +11,7 @@ export default () => {
   } = useContext(PictureContext)
 
   const saveHunt = async () => {
-    await createHunt(picture, formInfo)
+    await createHunt(picture.base64, formInfo)
     reset()
     navigate('HuntList')
   }
