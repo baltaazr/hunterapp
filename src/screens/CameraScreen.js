@@ -60,12 +60,7 @@ const CameraScreen = () => {
             camera = ref
           }}
         >
-          <Button
-            title="Take Picture"
-            onPress={() => {
-              snap()
-            }}
-          />
+          <Button title="Take Picture" onPress={snap} />
         </Camera>
       ) : perm === 'denied' ? (
         <Text>Please grant camera access</Text>

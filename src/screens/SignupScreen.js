@@ -36,6 +36,12 @@ const SignupScreen = ({ navigation }) => {
           navigation.navigate('Camera')
         }}
       />
+      <Button
+        title="test form"
+        onPress={() => {
+          navigation.navigate('Form')
+        }}
+      />
     </View>
   )
 }
