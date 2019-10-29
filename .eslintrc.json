@@ -37,7 +37,8 @@
     "arrow-parens": "off",
     "no-trailing-spaces": "off",
     "operator-linebreak": "off",
-    "space-before-function-paren": "off"
+    "space-before-function-paren": "off",
+    "object-curly-newline": "off"
   },
   "settings": {
     "import/resolver": {
