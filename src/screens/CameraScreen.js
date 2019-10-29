@@ -55,6 +55,12 @@ const CameraScreen = ({ navigation }) => {
         <>
           <Image source={{ uri: picture.uri }} style={styles.picture} />
           <Button
+            title="Delete Image"
+            onPress={() => {
+              setPicture(null)
+            }}
+          />
+          <Button
             title="Proceed"
             onPress={() => {
               navigation.navigate('Form')
