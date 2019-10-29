@@ -46,6 +46,7 @@ const SigninForm = ({ errorMessage, onSubmit, submitButtonText }) => {
         input={password}
         setInput={setPassword}
         icon={<Ionicons name="md-lock" size={32} color="white" />}
+        secureTextEntry
       />
       {errorMessage ? (
         <Text style={styles.errorMessage}>{errorMessage}</Text>

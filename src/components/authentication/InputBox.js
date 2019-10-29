@@ -35,7 +35,14 @@ const styles = StyleSheet.create({
 })
 
 // <AntDesign name="mail" />
-const InputBox = ({ label, icon, placeholder, input, setInput }) => (
+const InputBox = ({
+  label,
+  icon,
+  placeholder,
+  input,
+  setInput,
+  secureTextEntry
+}) => (
   <View style={styles.wrapper}>
     <Text style={styles.label}>{label}</Text>
     <View style={styles.inputWrapper}>
@@ -49,6 +56,7 @@ const InputBox = ({ label, icon, placeholder, input, setInput }) => (
         underlineColorAndroid="transparent"
         autoCapitalize="none"
         autoCorrect={false}
+        secureTextEntry={secureTextEntry}
       />
     </View>
   </View>
