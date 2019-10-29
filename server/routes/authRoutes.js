@@ -10,6 +10,8 @@ const router = express.Router()
 router.post('/signup', async (req, res) => {
   const { email, password, name } = req.body
 
+  console.log(email, password, name)
+
   try {
     if (!email) throw new Error('Missing Email')
     if (!password) throw new Error('Missing Password')
@@ -21,6 +23,7 @@ router.post('/signup', async (req, res) => {
     const token = jwt.sign({ userId: user._id }, 'MY_SECRET_KEY')
     res.send({ token })
   } catch (err) {
+    console.log(err)
     return res.status(422).send(err.message)
   }
 })
@@ -42,6 +45,7 @@ router.post('/signin', async (req, res) => {
     const token = jwt.sign({ userId: user._id }, 'MY_SECRET_KEY')
     res.send({ token })
   } catch (err) {
+    console.log(err)
     return res.status(422).send({ error: 'Invalid password or email' })
   }
 })

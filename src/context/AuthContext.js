@@ -35,9 +35,9 @@ const clearErrorMessage = dispatch => () => {
   dispatch({ type: 'clear_error_message' })
 }
 
-const signup = dispatch => async ({ email, password }) => {
+const signup = dispatch => async ({ name, email, password }) => {
   try {
-    const response = await hunterApi.post('/signup', { email, password })
+    const response = await hunterApi.post('/signup', { name, email, password })
     await AsyncStorage.setItem('token', response.data.token)
 
     dispatch({ type: 'signin', payload: response.data.token })
