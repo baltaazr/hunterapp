@@ -6,10 +6,21 @@ import { View, StyleSheet, Text, Picker } from 'react-native'
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'gray',
+    margin: 5
+  },
+  questionWrapper: {
     flex: 1
   },
-  child: {
-    flex: 1
+  question: {
+    color: 'white',
+    fontSize: 20,
+    textAlign: 'center',
+    textAlignVertical: 'center'
+  },
+  pickerWrapper: {
+    flex: 2
   }
 })
 
@@ -21,10 +32,10 @@ const FormItem = ({ question, responses, index }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.child}>
-        <Text>{question}</Text>
+      <View style={styles.questionWrapper}>
+        <Text style={styles.question}>{question}</Text>
       </View>
-      <View style={styles.child}>
+      <View style={styles.pickerWrapper}>
         <Picker
           selectedValue={formInfo[index] ? formInfo[index] : responses[0].value}
           onValueChange={value => setFormInfo({ index, value })}
