@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
-    marginTop: 30
+    backgroundColor: '#eeeeee',
+    marginTop: 40
   },
   text: {
     color: 'purple',
