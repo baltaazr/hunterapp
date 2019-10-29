@@ -36,7 +36,7 @@ const SigninForm = ({ errorMessage, onSubmit, submitButtonText }) => {
     <KeyboardAvoidingView style={styles.wrapper} behavior="padding">
       <InputBox
         label="姓名 Name"
-        placeholder="輸入密碼 Your Password"
+        placeholder="輸入姓名 Your Name"
         input={name}
         setInput={setName}
         icon={<Ionicons name="ios-person" size={32} color="white" />}
