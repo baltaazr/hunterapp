@@ -1,20 +1,23 @@
-import Spacer from './Spacer'
-
 import React from 'react'
-import { Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { withNavigation } from 'react-navigation'
 
 const styles = StyleSheet.create({
+  wrapper: {},
   link: {
-    color: 'blue'
+    color: 'gray',
+    fontSize: 20,
+    width: '100%',
+    textAlign: 'center',
+    marginBottom: 20
   }
 })
 
 const NavLink = ({ navigation, text, routeName }) => (
   <TouchableOpacity onPress={() => navigation.navigate(routeName)}>
-    <Spacer>
+    <View style={styles.wrapper}>
       <Text style={styles.link}>{text}</Text>
-    </Spacer>
+    </View>
   </TouchableOpacity>
 )
 

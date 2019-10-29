@@ -1,14 +1,17 @@
 import InputBox from './InputBox'
+import SubmitButton from './SubmitButton'
 
 import React, { useState } from 'react'
 import { View, StyleSheet } from 'react-native'
-import { Text, Button } from 'react-native-elements'
+import { Text } from 'react-native-elements'
 import { Feather, Ionicons } from '@expo/vector-icons'
 
 const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 20,
+    flex: 3
   },
   errorMessage: {
     fontSize: 16,
@@ -19,6 +22,10 @@ const styles = StyleSheet.create({
     // flex: 2
   }
 })
+
+/**
+ * TODO: PULL OUT ALL THE STRINGS
+ */
 
 const SigninForm = ({ errorMessage, onSubmit, submitButtonText }) => {
   const [email, setEmail] = useState('')
@@ -43,8 +50,11 @@ const SigninForm = ({ errorMessage, onSubmit, submitButtonText }) => {
       {errorMessage ? (
         <Text style={styles.errorMessage}>{errorMessage}</Text>
       ) : null}
-      <Button
+      <SubmitButton
         title={submitButtonText}
+        icon={
+          <Ionicons name="ios-arrow-dropdown-circle" size={32} color="purple" />
+        }
         onPress={() => onSubmit({ email, password })}
       />
     </View>

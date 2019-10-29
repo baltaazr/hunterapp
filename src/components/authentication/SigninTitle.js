@@ -4,7 +4,9 @@ import { View, Text, StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
   wrapper: {
     width: '100%',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    marginTop: 23,
+    flex: 3
   },
   title: {
     fontSize: 80,
@@ -16,7 +18,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: '#FFA967',
     alignSelf: 'flex-end',
-    marginRight: '20%'
+    marginRight: '25%'
   }
 })
 

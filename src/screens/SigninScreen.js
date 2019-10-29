@@ -1,4 +1,4 @@
-import { SigninForm, SigninTitle, NavLink } from '../components'
+import { SigninForm, SigninTitle, GoToOther } from '../components'
 import { Context } from '../context/AuthContext'
 
 import React, { useContext } from 'react'
@@ -32,12 +32,9 @@ const SigninScreen = () => {
         <SigninForm
           errorMessage={state.errorMessage}
           onSubmit={signin}
-          submitButtonText="Sign In"
+          submitButtonText="登入 Sign In"
         />
-        <NavLink
-          text="Dont have an account? Sign up instead"
-          routeName="Signup"
-        />
+        <GoToOther text="註冊 Create Account" routeName="Signup" />
       </ImageBackground>
     </SafeAreaView>
   )
