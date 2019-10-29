@@ -2,19 +2,37 @@ import FormItem from '../components/FormItem'
 import { useSaveHunt } from '../hooks'
 
 import React from 'react'
-import { StyleSheet, FlatList, View, Button } from 'react-native'
+import {
+  StyleSheet,
+  FlatList,
+  SafeAreaView,
+  View,
+  Text,
+  TouchableOpacity
+} from 'react-native'
 import { FORM_ITEMS } from 'config'
 
 const styles = StyleSheet.create({
-  container: { flex: 1 }
+  container: { flex: 1, backgroundColor: 'black' },
+  listContainer: {
+    width: '100%',
+    flexDirection: 'column'
+    // alignItems: 'center'
+  },
+  submitButton: {
+    width: 100,
+    color: 'white',
+    backgroundColor: 'black'
+  }
 })
 
 const FormScreen = () => {
   const [saveHunt] = useSaveHunt()
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
       <FlatList
+        contentContainerStyle={styles.listContainer}
         data={FORM_ITEMS}
         renderItem={({ item, index }) => (
           <FormItem
@@ -25,9 +43,17 @@ const FormScreen = () => {
         )}
         keyExtractor={item => item.question}
       />
-      <Button title="submit" onPress={saveHunt} />
-    </View>
+      <TouchableOpacity onPress={saveHunt}>
+        <View style={styles.submitButton}>
+          <Text>Submit</Text>
+        </View>
+      </TouchableOpacity>
+    </SafeAreaView>
   )
+}
+
+FormScreen.navigationOptions = {
+  header: null
 }
 
 export default FormScreen
