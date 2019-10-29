@@ -8,6 +8,7 @@ import {
   SignupScreen
 } from './src/screens'
 import { AuthProvider, HuntProvider } from './src/context'
+import { setNavigator } from './src/utils'
 
 import React from 'react'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
@@ -37,7 +38,11 @@ const App = createAppContainer(switchNavigator)
 export default () => (
   <HuntProvider>
     <AuthProvider>
-      <App />
+      <App
+        ref={navigator => {
+          setNavigator(navigator)
+        }}
+      />
     </AuthProvider>
   </HuntProvider>
 )
