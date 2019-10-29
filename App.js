@@ -4,10 +4,12 @@ import {
   FormScreen,
   HuntDetailScreen,
   HuntListScreen,
+  ResolveAuthScreen,
   SigninScreen,
   SignupScreen
 } from './src/screens'
 import { AuthProvider, HuntProvider } from './src/context'
+import { setNavigator } from './src/utils'
 
 import React from 'react'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
@@ -15,6 +17,7 @@ import { createStackNavigator } from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 
 const switchNavigator = createSwitchNavigator({
+  ResolveAuth: ResolveAuthScreen,
   loginFlow: createStackNavigator({
     Signup: SignupScreen,
     Signin: SigninScreen
@@ -37,7 +40,11 @@ const App = createAppContainer(switchNavigator)
 export default () => (
   <HuntProvider>
     <AuthProvider>
-      <App />
+      <App
+        ref={navigator => {
+          setNavigator(navigator)
+        }}
+      />
     </AuthProvider>
   </HuntProvider>
 )
