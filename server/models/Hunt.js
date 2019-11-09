@@ -1,5 +1,16 @@
 const mongoose = require('mongoose')
 
+const pointSchema = new mongoose.Schema({
+  timestamp: Number,
+  coords: {
+    latitude: Number,
+    longitude: Number,
+    altitude: Number,
+    accuracy: Number,
+    heading: Number,
+    speed: Number
+  }
+})
 const huntSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -13,6 +24,10 @@ const huntSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: new Date(),
+    required: true
+  },
+  location: {
+    type: pointSchema,
     required: true
   },
   formInfo: { type: [String], required: true }

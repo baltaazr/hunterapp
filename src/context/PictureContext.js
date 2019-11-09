@@ -11,6 +11,8 @@ const pictureReducer = (state, action) => {
       }
     case 'set_picture':
       return { ...state, picture: action.payload }
+    case 'set_location':
+      return { ...state, location: action.payload }
     case 'set_form_info':
       // eslint-disable-next-line no-case-declarations
       const newFormInfo = [...state.formInfo]
@@ -29,6 +31,10 @@ const setPicture = dispatch => picture => {
   dispatch({ type: 'set_picture', payload: picture })
 }
 
+const setLocation = dispatch => location => {
+  dispatch({ type: 'set_location', payload: location })
+}
+
 const setFormInfo = dispatch => formInfo => {
   dispatch({ type: 'set_form_info', payload: formInfo })
 }
@@ -36,6 +42,10 @@ const setFormInfo = dispatch => formInfo => {
 // state contains list of hunts
 export const { Provider, Context } = createDataContext(
   pictureReducer,
-  { reset, setPicture, setFormInfo },
-  { picture: null, formInfo: FORM_ITEMS.map(item => item.responses[0].value) }
+  { reset, setPicture, setLocation, setFormInfo },
+  {
+    picture: null,
+    location: null,
+    formInfo: FORM_ITEMS.map(item => item.responses[0].value)
+  }
 )

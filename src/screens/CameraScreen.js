@@ -13,6 +13,7 @@ import {
   StatusBar,
   ImageBackground
 } from 'react-native'
+import * as Location from 'expo-location'
 import * as Permissions from 'expo-permissions'
 import { Camera } from 'expo-camera'
 import { NavigationEvents } from 'react-navigation'
@@ -113,17 +114,28 @@ const CameraScreen = ({ navigation }) => {
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back)
   const {
     state: { picture },
-    setPicture
+    setPicture,
+    setLocation
   } = useContext(PictureContext)
 
   useEffect(() => {
-    const askCameraPermission = async () => {
-      const { status } = await Permissions.askAsync(Permissions.CAMERA)
-      setPerm(status)
+    const askForPerimissions = async () => {
+      const cameraPermission = await Permissions.askAsync(Permissions.CAMERA)
+      const locationPerimission = await Permissions.askAsync(
+        Permissions.LOCATION
+      )
+      if (
+        cameraPermission.status === 'granted' &&
+        locationPerimission.status === 'granted'
+      ) {
+        setPerm('granted')
+      } else {
+        setPerm('denied')
+      }
     }
 
     try {
-      askCameraPermission()
+      askForPerimissions()
     } catch (err) {
       setPerm('denied')
     }
@@ -131,7 +143,9 @@ const CameraScreen = ({ navigation }) => {
 
   const snap = async () => {
     const pic = await camera.takePictureAsync({ base64: true })
+    const location = await Location.getCurrentPositionAsync({})
     setPicture(pic)
+    setLocation(location)
   }
 
   return (
@@ -217,7 +231,7 @@ const CameraScreen = ({ navigation }) => {
           </SafeAreaView>
         </Camera>
       ) : perm === 'denied' ? (
-        <Text>Please grant camera access</Text>
+        <Text>Please grant camera and location access</Text>
       ) : null}
     </View>
   )

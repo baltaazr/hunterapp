@@ -14,7 +14,7 @@ const expressDebug = debug('express')
 
 const app = express()
 
-app.use(bodyParser.json({ limit: '10mb' }))
+app.use(bodyParser.json({ limit: '20mb' }))
 app.use(authRoutes)
 app.use(huntRoutes)
 

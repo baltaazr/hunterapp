@@ -16,8 +16,8 @@ const fetchHunts = dispatch => async () => {
   dispatch({ type: 'fetch_hunts', payload: response.data })
 }
 // eslint-disable-next-line no-unused-vars
-const createHunt = dispatch => async (picture, formInfo) => {
-  await hunterApi.post('/hunts', { picture, formInfo })
+const createHunt = dispatch => async (picture, location, formInfo) => {
+  await hunterApi.post('/hunts', { picture, location, formInfo })
 }
 
 // state contains list of hunts
