@@ -5,22 +5,42 @@ import React, { useState, useEffect, useContext } from 'react'
 import {
   TouchableOpacity,
   Dimensions,
+  SafeAreaView,
+  Platform,
   View,
   StyleSheet,
   Text,
   Button,
-  Image
+  Image,
+  StatusBar
 } from 'react-native'
 import * as Permissions from 'expo-permissions'
 import { Camera } from 'expo-camera'
 import { NavigationEvents } from 'react-navigation'
+import { Ionicons } from '@expo/vector-icons'
 
 const takePicButtonWidth = Dimensions.get('window').width * 0.15
 const styles = StyleSheet.create({
   container: { flex: 1 },
+  safeArea: {
+    flex: 1,
+    paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
+  },
   camera: { flex: 1 },
   picture: { flex: 1 },
-  cameraTopComponents: { flex: 2 },
+  cameraTopComponents: { flex: 2, flexDirection: 'row' },
+  cameraTopLeftComponents: { flex: 2 },
+  cameraTopMidComponents: {
+    flex: 6,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  cameraTopRightComponents: {
+    flex: 2,
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
   cameraMidComponents: { flex: 6 },
   cameraBottomComponents: {
     flex: 2,
@@ -57,6 +77,7 @@ let camera
 const CameraScreen = ({ navigation }) => {
   const [perm, setPerm] = useState(null)
   const [focus, setFocus] = useState(true)
+  const [cameraType, setCameraType] = useState(Camera.Constants.Type.back)
   const {
     state: { picture },
     setPicture
@@ -112,18 +133,37 @@ const CameraScreen = ({ navigation }) => {
           ref={ref => {
             camera = ref
           }}
+          type={cameraType}
         >
-          <View style={styles.cameraTopComponents} />
-          <View style={styles.cameraMidComponents} />
-          <View style={styles.cameraBottomComponents}>
-            <View style={styles.cameraBottomLeftComponents} />
-            <View style={styles.cameraBottomMidComponents}>
-              <TouchableOpacity onPress={snap}>
-                <View style={styles.takePicture} />
-              </TouchableOpacity>
+          <SafeAreaView style={styles.safeArea} forceInset={{ top: 'always' }}>
+            <View style={styles.cameraTopComponents}>
+              <View style={styles.cameraTopLeftComponents} />
+              <View style={styles.cameraTopMidComponents} />
+              <View style={styles.cameraTopRightComponents}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setCameraType(
+                      cameraType === Camera.Constants.Type.back
+                        ? Camera.Constants.Type.front
+                        : Camera.Constants.Type.back
+                    )
+                  }}
+                >
+                  <Ionicons name="ios-reverse-camera" size={48} color="white" />
+                </TouchableOpacity>
+              </View>
             </View>
-            <View style={styles.cameraBottomRightComponents} />
-          </View>
+            <View style={styles.cameraMidComponents} />
+            <View style={styles.cameraBottomComponents}>
+              <View style={styles.cameraBottomLeftComponents} />
+              <View style={styles.cameraBottomMidComponents}>
+                <TouchableOpacity onPress={snap}>
+                  <View style={styles.takePicture} />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.cameraBottomRightComponents} />
+            </View>
+          </SafeAreaView>
         </Camera>
       ) : perm === 'denied' ? (
         <Text>Please grant camera access</Text>

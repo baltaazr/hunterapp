@@ -25,7 +25,8 @@ const tryLocalSignin = dispatch => async () => {
   if (token) {
     dispatch({ type: 'signin', payload: token })
 
-    navigate('HuntList')
+    navigate('Camera')
+    // navigate('HuntList')
   } else {
     navigate('Signup')
   }
