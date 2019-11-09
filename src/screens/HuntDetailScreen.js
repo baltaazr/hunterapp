@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
 })
 
 const HuntDetailScreen = ({ navigation }) => {
-  console.log('load')
   const { state } = useContext(HuntContext)
   const _id = navigation.getParam('_id')
 
@@ -23,10 +22,7 @@ const HuntDetailScreen = ({ navigation }) => {
   const [picture, setPicture] = useState('')
 
   useEffect(() => {
-    console.log(hunt.picture.length)
-    const string = LZString.decompressFromUTF16(hunt.picture)
-    console.log(string.length)
-    setPicture(string)
+    setPicture(LZString.decompressFromUTF16(hunt.picture))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

@@ -44,7 +44,6 @@ router.post('/signin', async (req, res) => {
     const token = jwt.sign({ userId: user._id }, 'MY_SECRET_KEY')
     res.send({ token })
   } catch (err) {
-    console.log(err)
     return res.status(422).send({ error: 'Invalid password or email' })
   }
 })
