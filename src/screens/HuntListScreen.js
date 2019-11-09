@@ -3,8 +3,8 @@ import { HuntContext } from '../context'
 
 import React, { useContext } from 'react'
 import { FlatList, TouchableOpacity } from 'react-native'
-import { NavigationEvents } from 'react-navigation';
-import { ListItem } from 'react-native-elements';
+import { NavigationEvents } from 'react-navigation'
+import { ListItem } from 'react-native-elements'
 
 const HuntListScreen = ({ navigation }) => {
   const { state, fetchHunts } = useContext(HuntContext)

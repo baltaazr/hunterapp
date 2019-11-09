@@ -2,15 +2,54 @@
 import { PictureContext } from '../context'
 
 import React, { useState, useEffect, useContext } from 'react'
-import { View, StyleSheet, Text, Button, Image } from 'react-native'
+import {
+  TouchableOpacity,
+  Dimensions,
+  View,
+  StyleSheet,
+  Text,
+  Button,
+  Image
+} from 'react-native'
 import * as Permissions from 'expo-permissions'
 import { Camera } from 'expo-camera'
 import { NavigationEvents } from 'react-navigation'
 
+const takePicButtonWidth = Dimensions.get('window').width * 0.15
 const styles = StyleSheet.create({
   container: { flex: 1 },
   camera: { flex: 1 },
-  picture: { flex: 1 }
+  picture: { flex: 1 },
+  cameraTopComponents: { flex: 2 },
+  cameraMidComponents: { flex: 6 },
+  cameraBottomComponents: {
+    flex: 2,
+    flexDirection: 'row'
+  },
+  cameraBottomLeftComponents: {
+    flex: 4
+  },
+  cameraBottomMidComponents: {
+    flex: 2,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  cameraBottomRightComponents: {
+    flex: 4
+  },
+  takePicture: {
+    borderRadius:
+      Math.round(
+        Dimensions.get('window').width + Dimensions.get('window').height
+      ) / 2,
+    width: takePicButtonWidth,
+    height: takePicButtonWidth,
+    borderColor: 'white',
+    borderWidth: 4,
+    backgroundColor: 'transparent',
+    marginBottom: 20
+  }
 })
 
 let camera
@@ -74,13 +113,27 @@ const CameraScreen = ({ navigation }) => {
             camera = ref
           }}
         >
-          <Button title="Take Picture" onPress={snap} />
+          <View style={styles.cameraTopComponents} />
+          <View style={styles.cameraMidComponents} />
+          <View style={styles.cameraBottomComponents}>
+            <View style={styles.cameraBottomLeftComponents} />
+            <View style={styles.cameraBottomMidComponents}>
+              <TouchableOpacity onPress={snap}>
+                <View style={styles.takePicture} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.cameraBottomRightComponents} />
+          </View>
         </Camera>
       ) : perm === 'denied' ? (
         <Text>Please grant camera access</Text>
       ) : null}
     </View>
   )
+}
+
+CameraScreen.navigationOptions = {
+  header: null
 }
 
 export default CameraScreen
