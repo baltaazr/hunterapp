@@ -14,7 +14,8 @@ const pointSchema = new mongoose.Schema({
 
 const weatherSchema = new mongoose.Schema({
   temperature: Number,
-  text: String
+  text: String,
+  humidity: Number
 })
 
 const huntSchema = new mongoose.Schema({

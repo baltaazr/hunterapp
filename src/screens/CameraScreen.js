@@ -116,7 +116,8 @@ const CameraScreen = ({ navigation }) => {
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back)
   const {
     state: { picture },
-    setPictureData
+    setPictureData,
+    reset
   } = useContext(PictureContext)
 
   useEffect(() => {
@@ -145,14 +146,30 @@ const CameraScreen = ({ navigation }) => {
   const snap = async () => {
     const pic = await camera.takePictureAsync({ base64: true })
     const location = await Location.getCurrentPositionAsync({})
-    const params = { apikey: weatherApiKey, q: `${location.coords.latitude},${location.coords.longitude}` }
-    const { data } = await weatherApi.get('/locations/v1/cities/geoposition/search', { params })
-    const weather = await weatherApi.get(`/currentconditions/v1/${data.Key}`, { params })
+    const { data } = await weatherApi.get(
+      '/locations/v1/cities/geoposition/search',
+      {
+        params: {
+          apikey: weatherApiKey,
+          q: `${location.coords.latitude},${location.coords.longitude}`
+        }
+      }
+    )
+    const weather = await weatherApi.get(`/currentconditions/v1/${data.Key}`, {
+      params: {
+        apikey: weatherApiKey,
+        details: true
+      }
+    })
     const weatherObj = weather.data[0]
     setPictureData({
       picture: pic,
       location,
-      weather: { temperature: weatherObj.Temperature.Metric.Value, text: weatherObj.WeatherText }
+      weather: {
+        temperature: weatherObj.Temperature.Metric.Value,
+        text: weatherObj.WeatherText,
+        humidity: weatherObj.RelativeHumidity
+      }
     })
   }
 
@@ -178,7 +195,7 @@ const CameraScreen = ({ navigation }) => {
               <View style={styles.pictureTopLeftComponents}>
                 <TouchableOpacity
                   style={styles.deleteImage}
-                  onPress={() => setPicture(null)}
+                  onPress={() => reset()}
                 >
                   <Entypo name="cross" color="white" size={40} />
                 </TouchableOpacity>

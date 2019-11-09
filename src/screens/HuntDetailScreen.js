@@ -48,7 +48,7 @@ const HuntDetailScreen = ({ navigation }) => {
       >
         <Marker coordinate={{ ...initialCoords }} />
       </MapView>
-      <Text>{`Weather: ${hunt.weather.text}, ${hunt.weather.temperature}°C`}</Text>
+      <Text>{`Weather: ${hunt.weather.text}, ${hunt.weather.temperature}°C, Humidity: ${hunt.weather.humidity}`}</Text>
       <FlatList
         data={hunt.formInfo}
         keyExtractor={item => item}
