@@ -1,8 +1,8 @@
-/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-unused-vars */
 import { HuntContext } from '../context'
 
-import React, { useContext } from 'react';
-import { StyleSheet, Text, Image, FlatList } from 'react-native';
+import React, { useContext } from 'react'
+import { StyleSheet, Text, Image, FlatList } from 'react-native'
 import { FORM_ITEMS } from 'config'
 
 const styles = StyleSheet.create({
@@ -25,13 +25,15 @@ const HuntDetailScreen = ({ navigation }) => {
       {/* <Image source={{ uri: base64Icon }} /> */}
       <FlatList
         data={hunt.formInfo}
+        keyExtractor={item => item}
         renderItem={({ item, index }) => (
           <>
-            <Text style={styles.question}>{`${FORM_ITEMS[index].question}: `}</Text>
+            <Text
+              style={styles.question}
+            >{`${FORM_ITEMS[index].question}: `}</Text>
             <Text>{item}</Text>
           </>
         )}
-        keyExtractor={item => item.question}
       />
     </>
   )

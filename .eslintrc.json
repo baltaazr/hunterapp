@@ -34,6 +34,7 @@
     "react-hooks/exhaustive-deps": "warn",
     "semi": "off",
     "comma-dangle": "off",
+    "no-underscore-dangle": "off",
     "arrow-parens": "off",
     "no-trailing-spaces": "off",
     "operator-linebreak": "off",

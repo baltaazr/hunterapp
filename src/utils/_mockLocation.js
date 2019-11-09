@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import * as Location from 'expo-location'
 
 export const startMockingLocation = () => {

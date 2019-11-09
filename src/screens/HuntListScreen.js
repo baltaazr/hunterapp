@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { HuntContext } from '../context'
 
 import React, { useContext } from 'react'

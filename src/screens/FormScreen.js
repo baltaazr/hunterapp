@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   submitButton: {
     width: 100,
     color: 'white',
-    backgroundColor: 'black'
+    backgroundColor: 'white'
   }
 })
 

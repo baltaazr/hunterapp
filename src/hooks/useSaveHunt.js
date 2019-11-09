@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { HuntContext, PictureContext } from '../context'
 import { navigate } from '../utils/navigationRef'
 
@@ -11,7 +12,7 @@ export default () => {
   } = useContext(PictureContext)
 
   const saveHunt = async () => {
-    await createHunt(picture.base64, formInfo)
+    await createHunt('test' /* ADD PICTURE DATA */, formInfo)
     reset()
     navigate('HuntList')
   }

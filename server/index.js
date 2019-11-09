@@ -1,5 +1,7 @@
 require('./models/User')
+require('./models/Hunt')
 const authRoutes = require('./routes/authRoutes')
+const huntRoutes = require('./routes/huntRoutes')
 const requireAuth = require('./middlewares/requireAuth')
 
 const express = require('express')
@@ -14,6 +16,7 @@ const app = express()
 
 app.use(bodyParser.json())
 app.use(authRoutes)
+app.use(huntRoutes)
 
 const MONGO_URI =
   'mongodb+srv://dbUser:dbUserPassword@cluster0-dkyvy.mongodb.net/test?retryWrites=true&w=majority'

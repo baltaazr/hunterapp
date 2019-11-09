@@ -12,8 +12,8 @@ const huntReducer = (state, action) => {
 }
 
 const fetchHunts = dispatch => async () => {
-  // const response = await hunterApi.get('/hunts')
-  // dispatch({ type: 'fetch_hunts', payload: response.data })
+  const response = await hunterApi.get('/hunts')
+  dispatch({ type: 'fetch_hunts', payload: response.data })
 }
 // eslint-disable-next-line no-unused-vars
 const createHunt = dispatch => async (picture, formInfo) => {
@@ -24,5 +24,5 @@ const createHunt = dispatch => async (picture, formInfo) => {
 export const { Provider, Context } = createDataContext(
   huntReducer,
   { fetchHunts, createHunt },
-  [{ picture: '', formInfo: ['male', 'no'], date: new Date() }]
+  []
 )
