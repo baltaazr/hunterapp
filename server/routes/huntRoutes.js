@@ -16,7 +16,7 @@ router.get('/hunts', async (req, res) => {
 })
 
 router.post('/hunts', async (req, res) => {
-  const { picture, location, formInfo } = req.body
+  const { picture, location, weather, formInfo } = req.body
   if (!picture || !formInfo) {
     return res
       .status(422)
@@ -28,6 +28,7 @@ router.post('/hunts', async (req, res) => {
       picture,
       Date: new Date(),
       location,
+      weather,
       formInfo,
       userId: req.user._id
     })

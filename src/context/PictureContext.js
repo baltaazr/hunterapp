@@ -2,17 +2,19 @@ import createDataContext from './createDataContext'
 
 import { FORM_ITEMS } from 'config'
 
+const defaultFormInfo = FORM_ITEMS.map(item => item.responses[0].value)
+
 const pictureReducer = (state, action) => {
   switch (action.type) {
     case 'reset':
       return {
         picture: null,
-        formInfo: FORM_ITEMS.map(item => item.responses[0].value)
+        location: null,
+        weather: null,
+        formInfo: defaultFormInfo
       }
-    case 'set_picture':
-      return { ...state, picture: action.payload }
-    case 'set_location':
-      return { ...state, location: action.payload }
+    case 'set_picture_data':
+      return { ...action.payload, formInfo: defaultFormInfo }
     case 'set_form_info':
       // eslint-disable-next-line no-case-declarations
       const newFormInfo = [...state.formInfo]
@@ -27,12 +29,8 @@ const reset = dispatch => () => {
   dispatch({ type: 'reset' })
 }
 
-const setPicture = dispatch => picture => {
-  dispatch({ type: 'set_picture', payload: picture })
-}
-
-const setLocation = dispatch => location => {
-  dispatch({ type: 'set_location', payload: location })
+const setPictureData = dispatch => pictureData => {
+  dispatch({ type: 'set_picture_data', payload: pictureData })
 }
 
 const setFormInfo = dispatch => formInfo => {
@@ -42,10 +40,11 @@ const setFormInfo = dispatch => formInfo => {
 // state contains list of hunts
 export const { Provider, Context } = createDataContext(
   pictureReducer,
-  { reset, setPicture, setLocation, setFormInfo },
+  { reset, setPictureData, setFormInfo },
   {
     picture: null,
     location: null,
-    formInfo: FORM_ITEMS.map(item => item.responses[0].value)
+    weather: null,
+    formInfo: defaultFormInfo
   }
 )

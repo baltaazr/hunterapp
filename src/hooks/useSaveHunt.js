@@ -7,7 +7,7 @@ import { useContext } from 'react'
 export default () => {
   const { createHunt } = useContext(HuntContext)
   const {
-    state: { picture, location, formInfo },
+    state: { picture, location, weather, formInfo },
     reset
   } = useContext(PictureContext)
 
@@ -15,6 +15,7 @@ export default () => {
     await createHunt(
       LZString.compressToUTF16(picture.base64),
       location,
+      weather,
       formInfo
     )
     reset()

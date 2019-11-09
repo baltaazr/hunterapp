@@ -11,6 +11,12 @@ const pointSchema = new mongoose.Schema({
     speed: Number
   }
 })
+
+const weatherSchema = new mongoose.Schema({
+  temperature: Number,
+  text: String
+})
+
 const huntSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -28,6 +34,10 @@ const huntSchema = new mongoose.Schema({
   },
   location: {
     type: pointSchema,
+    required: true
+  },
+  weather: {
+    type: weatherSchema,
     required: true
   },
   formInfo: { type: [String], required: true }

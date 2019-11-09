@@ -13,3 +13,5 @@ export const FORM_ITEMS = [
     responses: [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }]
   }
 ]
+
+export const weatherApiKey = 'xYRO15hWiRFvncBTGXiCidA5M9M1rZng'

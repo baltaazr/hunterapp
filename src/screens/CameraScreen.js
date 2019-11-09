@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { PictureContext } from '../context'
+import { weatherApi } from '../api'
 
+import { weatherApiKey } from 'config'
 import React, { useState, useEffect, useContext } from 'react'
 import {
   TouchableOpacity,
@@ -114,8 +116,7 @@ const CameraScreen = ({ navigation }) => {
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back)
   const {
     state: { picture },
-    setPicture,
-    setLocation
+    setPictureData
   } = useContext(PictureContext)
 
   useEffect(() => {
@@ -144,8 +145,15 @@ const CameraScreen = ({ navigation }) => {
   const snap = async () => {
     const pic = await camera.takePictureAsync({ base64: true })
     const location = await Location.getCurrentPositionAsync({})
-    setPicture(pic)
-    setLocation(location)
+    const params = { apikey: weatherApiKey, q: `${location.coords.latitude},${location.coords.longitude}` }
+    const { data } = await weatherApi.get('/locations/v1/cities/geoposition/search', { params })
+    const weather = await weatherApi.get(`/currentconditions/v1/${data.Key}`, { params })
+    const weatherObj = weather.data[0]
+    setPictureData({
+      picture: pic,
+      location,
+      weather: { temperature: weatherObj.Temperature.Metric.Value, text: weatherObj.WeatherText }
+    })
   }
 
   return (
