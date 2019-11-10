@@ -17,7 +17,12 @@ const HuntListScreen = ({ navigation }) => {
           <TouchableOpacity
             onPress={() => navigation.navigate('HuntDetail', { _id: item._id })}
           >
-            <ListItem chevron title={item.date.toString()} />
+            <ListItem
+              chevron
+              title={`${item.date.toString()}, ${item.formInfo[0]}, ${
+                item.formInfo[1]
+              }`}
+            />
           </TouchableOpacity>
         )}
       />

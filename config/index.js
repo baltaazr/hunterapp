@@ -3,13 +3,6 @@ export const NGROK_ADDRESS = 'http://74a5633f.ngrok.io'
 
 export const FORM_ITEMS = [
   {
-    question: 'What gender is it?',
-    responses: [
-      { value: 'male', label: 'Male' },
-      { value: 'female', label: 'Female' }
-    ]
-  },
-  {
     question: 'What animal is it?',
     responses: [
       {
@@ -22,6 +15,13 @@ export const FORM_ITEMS = [
         label: 'Wild Boar',
         img: require('../assets/FormAnswerImages/wildboar.jpg')
       }
+    ]
+  },
+  {
+    question: 'What gender is it?',
+    responses: [
+      { value: 'male', label: 'Male' },
+      { value: 'female', label: 'Female' }
     ]
   }
 ]
