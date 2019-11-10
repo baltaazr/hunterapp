@@ -27,3 +27,5 @@ export const FORM_ITEMS = [
 ]
 
 export const weatherApiKey = 'xYRO15hWiRFvncBTGXiCidA5M9M1rZng'
+
+export const DRAWER_WIDTH = 150

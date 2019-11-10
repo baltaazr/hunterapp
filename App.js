@@ -1,5 +1,4 @@
 import {
-  AccountScreen,
   CameraScreen,
   FormScreen,
   HuntDetailScreen,
@@ -18,6 +17,7 @@ import {
 } from './src/context'
 import { setNavigator } from './src/utils'
 
+import { DRAWER_WIDTH } from 'config'
 import React from 'react'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
@@ -41,7 +41,9 @@ const switchNavigator = createSwitchNavigator({
           })
         },
         {
-          contentComponent: Drawer
+          contentComponent: Drawer,
+          drawerWidth: DRAWER_WIDTH,
+          drawerBackgroundColor: 'transparent'
         }
       ),
       HuntListFlow: createStackNavigator({
