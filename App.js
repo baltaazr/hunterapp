@@ -6,8 +6,10 @@ import {
   HuntListScreen,
   ResolveAuthScreen,
   SigninScreen,
-  SignupScreen
+  SignupScreen,
+  InfoScreen
 } from './src/screens'
+import { Drawer } from './src/components'
 import { AuthProvider, HuntProvider, PictureProvider } from './src/context'
 import { setNavigator } from './src/utils'
 
@@ -15,6 +17,7 @@ import React from 'react'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs'
+import { createDrawerNavigator } from 'react-navigation-drawer'
 
 const switchNavigator = createSwitchNavigator({
   ResolveAuth: ResolveAuthScreen,
@@ -24,15 +27,23 @@ const switchNavigator = createSwitchNavigator({
   }),
   mainFlow: createMaterialTopTabNavigator(
     {
+      Info: InfoScreen,
+      MainScreenFlow: createDrawerNavigator(
+        {
+          HuntRecordFlow: createStackNavigator({
+            Camera: CameraScreen,
+            Form: FormScreen
+          }),
+          Account: AccountScreen
+        },
+        {
+          contentComponent: Drawer
+        }
+      ),
       HuntListFlow: createStackNavigator({
         HuntList: HuntListScreen,
         HuntDetail: HuntDetailScreen
-      }),
-      HuntRecordFlow: createStackNavigator({
-        Camera: CameraScreen,
-        Form: FormScreen
-      }),
-      Account: AccountScreen
+      })
     },
     {
       animationEnabled: true,

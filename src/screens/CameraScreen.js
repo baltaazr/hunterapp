@@ -239,7 +239,11 @@ const CameraScreen = ({ navigation }) => {
         >
           <SafeAreaView style={styles.safeArea} forceInset={{ top: 'always' }}>
             <View style={styles.cameraTopComponents}>
-              <View style={styles.cameraTopLeftComponents} />
+              <View style={styles.cameraTopLeftComponents}>
+                <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+                  <Entypo name="menu" color="white" size={38} />
+                </TouchableOpacity>
+              </View>
               <View style={styles.cameraTopMidComponents} />
               <View style={styles.cameraTopRightComponents}>
                 <TouchableOpacity
@@ -258,9 +262,7 @@ const CameraScreen = ({ navigation }) => {
             <View style={styles.cameraMidComponents} />
             <View style={styles.cameraBottomComponents}>
               <View style={styles.cameraBottomLeftComponents}>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate('HuntList')}
-                >
+                <TouchableOpacity onPress={() => navigation.navigate('Info')}>
                   <MaterialIcons name="search" size={40} color="white" />
                   <Text style={styles.infoText}>資料</Text>
                 </TouchableOpacity>
@@ -272,7 +274,7 @@ const CameraScreen = ({ navigation }) => {
               </View>
               <View style={styles.cameraBottomRightComponents}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate('Account')}
+                  onPress={() => navigation.navigate('HuntList')}
                 >
                   <AntDesign name="book" size={38} color="white" />
                   <Text style={styles.infoText}>紀錄</Text>

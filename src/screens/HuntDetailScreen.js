@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   question: {
     fontWeight: 'bold'
   },
-  background: { height: 200 },
+  img: { height: 200 },
   map: {
     height: 200
   }
@@ -36,7 +36,7 @@ const HuntDetailScreen = ({ navigation }) => {
     <>
       <Image
         source={{ uri: `data:image/png;base64,${picture}` }}
-        style={styles.background}
+        style={styles.img}
       />
       <MapView
         initialRegion={{
