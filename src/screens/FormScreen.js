@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const FormScreen = () => {
+const FormScreen = ({ navigation }) => {
   const [saveHunt] = useSaveHunt()
 
   return (
@@ -43,7 +43,12 @@ const FormScreen = () => {
         )}
         keyExtractor={item => item.question}
       />
-      <TouchableOpacity onPress={saveHunt}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('Camera')
+          saveHunt()
+        }}
+      >
         <View style={styles.submitButton}>
           <Text>Submit</Text>
         </View>

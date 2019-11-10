@@ -19,7 +19,7 @@ import * as Location from 'expo-location'
 import * as Permissions from 'expo-permissions'
 import { Camera } from 'expo-camera'
 import { NavigationEvents } from 'react-navigation'
-import { Ionicons, Entypo } from '@expo/vector-icons'
+import { Ionicons, Entypo, MaterialIcons, AntDesign } from '@expo/vector-icons'
 
 const takePicButtonWidth = Dimensions.get('window').width * 0.15
 const styles = StyleSheet.create({
@@ -53,6 +53,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   cameraBottomLeftComponents: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingRight: 20,
     flex: 4
   },
   cameraBottomMidComponents: {
@@ -62,6 +65,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   cameraBottomRightComponents: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: 20,
     flex: 4
   },
   pictureTopElements: {
@@ -105,6 +111,11 @@ const styles = StyleSheet.create({
   deleteImage: { alignSelf: 'flex-start' },
   continueImage: {
     alignSelf: 'flex-end'
+  },
+  infoText: {
+    color: 'white',
+    textAlign: 'center',
+    marginTop: 5
   }
 })
 
@@ -177,7 +188,8 @@ const CameraScreen = ({ navigation }) => {
     <View style={styles.container}>
       <NavigationEvents
         onWillBlur={() => {
-          setFocus(false)
+          //! NOT SETTING FOCUS FOR BETTER UX
+          // setFocus(false)
         }}
         onWillFocus={() => {
           setFocus(true)
@@ -245,13 +257,27 @@ const CameraScreen = ({ navigation }) => {
             </View>
             <View style={styles.cameraMidComponents} />
             <View style={styles.cameraBottomComponents}>
-              <View style={styles.cameraBottomLeftComponents} />
+              <View style={styles.cameraBottomLeftComponents}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('HuntList')}
+                >
+                  <MaterialIcons name="search" size={40} color="white" />
+                  <Text style={styles.infoText}>資料</Text>
+                </TouchableOpacity>
+              </View>
               <View style={styles.cameraBottomMidComponents}>
                 <TouchableOpacity onPress={snap}>
                   <View style={styles.takePicture} />
                 </TouchableOpacity>
               </View>
-              <View style={styles.cameraBottomRightComponents} />
+              <View style={styles.cameraBottomRightComponents}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('Account')}
+                >
+                  <AntDesign name="book" size={38} color="white" />
+                  <Text style={styles.infoText}>紀錄</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </SafeAreaView>
         </Camera>
