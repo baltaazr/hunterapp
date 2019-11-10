@@ -39,7 +39,9 @@
     "no-trailing-spaces": "off",
     "operator-linebreak": "off",
     "space-before-function-paren": "off",
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "implicit-arrow-linebreak": "off",
+    "react/jsx-curly-newline": "off"
   },
   "settings": {
     "import/resolver": {
