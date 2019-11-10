@@ -14,7 +14,7 @@ import { setNavigator } from './src/utils'
 import React from 'react'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
-import { createBottomTabNavigator } from 'react-navigation-tabs'
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs'
 
 const switchNavigator = createSwitchNavigator({
   ResolveAuth: ResolveAuthScreen,
@@ -22,17 +22,27 @@ const switchNavigator = createSwitchNavigator({
     Signup: SignupScreen,
     Signin: SigninScreen
   }),
-  mainFlow: createBottomTabNavigator({
-    HuntListFlow: createStackNavigator({
-      HuntList: HuntListScreen,
-      HuntDetail: HuntDetailScreen
-    }),
-    HuntRecordFlow: createStackNavigator({
-      Camera: CameraScreen,
-      Form: FormScreen
-    }),
-    Account: AccountScreen
-  })
+  mainFlow: createMaterialTopTabNavigator(
+    {
+      HuntListFlow: createStackNavigator({
+        HuntList: HuntListScreen,
+        HuntDetail: HuntDetailScreen
+      }),
+      HuntRecordFlow: createStackNavigator({
+        Camera: CameraScreen,
+        Form: FormScreen
+      }),
+      Account: AccountScreen
+    },
+    {
+      animationEnabled: true,
+      tabBarOptions: {
+        showLabel: false,
+        showIcon: false,
+        style: { height: 0 }
+      }
+    }
+  )
 })
 
 const App = createAppContainer(switchNavigator)
