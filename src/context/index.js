@@ -4,3 +4,4 @@ export {
   Context as PictureContext,
   Provider as PictureProvider
 } from './PictureContext'
+export { Context as UserContext, Provider as UserProvider } from './UserContext'

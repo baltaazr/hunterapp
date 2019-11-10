@@ -31,7 +31,7 @@
     "import/no-webpack-loader-syntax": "off",
     "no-restricted-globals": "off",
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/exhaustive-deps": "off",
     "semi": "off",
     "comma-dangle": "off",
     "no-underscore-dangle": "off",

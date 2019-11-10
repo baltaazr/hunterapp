@@ -29,7 +29,6 @@ const HuntDetailScreen = ({ navigation }) => {
 
   useEffect(() => {
     setPicture(LZString.decompressFromUTF16(hunt.picture))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

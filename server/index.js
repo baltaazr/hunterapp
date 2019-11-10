@@ -2,6 +2,7 @@ require('./models/User')
 require('./models/Hunt')
 const authRoutes = require('./routes/authRoutes')
 const huntRoutes = require('./routes/huntRoutes')
+const userRoutes = require('./routes/userRoutes')
 const requireAuth = require('./middlewares/requireAuth')
 
 const express = require('express')
@@ -17,6 +18,7 @@ const app = express()
 app.use(bodyParser.json({ limit: '20mb' }))
 app.use(authRoutes)
 app.use(huntRoutes)
+app.use(userRoutes)
 
 const MONGO_URI =
   'mongodb+srv://dbUser:dbUserPassword@cluster0-dkyvy.mongodb.net/test?retryWrites=true&w=majority'

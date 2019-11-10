@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { PictureContext } from '../context'
 import { weatherApi } from '../api'
 

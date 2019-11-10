@@ -10,7 +10,12 @@ import {
   InfoScreen
 } from './src/screens'
 import { Drawer } from './src/components'
-import { AuthProvider, HuntProvider, PictureProvider } from './src/context'
+import {
+  AuthProvider,
+  HuntProvider,
+  PictureProvider,
+  UserProvider
+} from './src/context'
 import { setNavigator } from './src/utils'
 
 import React from 'react'
@@ -33,8 +38,7 @@ const switchNavigator = createSwitchNavigator({
           HuntRecordFlow: createStackNavigator({
             Camera: CameraScreen,
             Form: FormScreen
-          }),
-          Account: AccountScreen
+          })
         },
         {
           contentComponent: Drawer
@@ -59,15 +63,17 @@ const switchNavigator = createSwitchNavigator({
 const App = createAppContainer(switchNavigator)
 
 export default () => (
-  <PictureProvider>
-    <HuntProvider>
-      <AuthProvider>
-        <App
-          ref={navigator => {
-            setNavigator(navigator)
-          }}
-        />
-      </AuthProvider>
-    </HuntProvider>
-  </PictureProvider>
+  <UserProvider>
+    <PictureProvider>
+      <HuntProvider>
+        <AuthProvider>
+          <App
+            ref={navigator => {
+              setNavigator(navigator)
+            }}
+          />
+        </AuthProvider>
+      </HuntProvider>
+    </PictureProvider>
+  </UserProvider>
 )
