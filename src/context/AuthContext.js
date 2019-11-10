@@ -25,8 +25,8 @@ const tryLocalSignin = dispatch => async () => {
   if (token) {
     dispatch({ type: 'signin', payload: token })
 
-    navigate('Camera')
-    // navigate('HuntList')
+    // navigate('Camera')
+    navigate('HuntList')
   } else {
     navigate('Signup')
   }
@@ -43,7 +43,7 @@ const signup = dispatch => async ({ name, email, password }) => {
 
     dispatch({ type: 'signin', payload: response.data.token })
 
-    navigate('HuntList')
+    navigate('Camera')
   } catch (err) {
     dispatch({
       type: 'add_error',

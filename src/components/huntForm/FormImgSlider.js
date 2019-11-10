@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import { PictureContext } from '../context'
+import { PictureContext } from '../../context'
 
 import React, { useContext } from 'react'
 import { View, StyleSheet, Image, Button, Text } from 'react-native'

@@ -1,4 +1,4 @@
-import { UserContext, AuthContext } from '../context'
+import { UserContext, AuthContext } from '../../context'
 
 import React, { useContext } from 'react'
 import {

@@ -1,4 +1,4 @@
-import { PictureContext } from '../context'
+import { PictureContext } from '../../context'
 
 import React, { useContext } from 'react'
 import { View, StyleSheet, Text, Picker } from 'react-native'
