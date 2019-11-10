@@ -33,8 +33,13 @@ const styles = StyleSheet.create({
   pictureComponentsWrapper: {
     flexDirection: 'column'
   },
-  cameraTopComponents: { flex: 2, flexDirection: 'row' },
-  cameraTopLeftComponents: { flex: 2 },
+  cameraTopComponents: { flex: 1, flexDirection: 'row' },
+  cameraTopLeftComponents: {
+    flex: 2,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   cameraTopMidComponents: {
     flex: 6,
     flexDirection: 'column',
@@ -44,9 +49,10 @@ const styles = StyleSheet.create({
   cameraTopRightComponents: {
     flex: 2,
     flexDirection: 'column',
+    justifyContent: 'center',
     alignItems: 'center'
   },
-  cameraMidComponents: { flex: 6 },
+  cameraMidComponents: { flex: 7 },
   cameraBottomComponents: {
     flex: 2,
     flexDirection: 'row'
