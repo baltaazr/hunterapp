@@ -37,7 +37,7 @@ const FormItem = ({ question, responses, index }) => {
       </View>
       <View style={styles.pickerWrapper}>
         <Picker
-          selectedValue={formInfo[index] ? formInfo[index] : responses[0].value}
+          selectedValue={formInfo[index]}
           onValueChange={value => setFormInfo({ index, value })}
         >
           {responses.map(item => (

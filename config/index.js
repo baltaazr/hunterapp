@@ -1,16 +1,28 @@
-export const NGROK_ADDRESS = 'http://ad72cab3.ngrok.io'
+/* eslint-disable global-require */
+export const NGROK_ADDRESS = 'http://74a5633f.ngrok.io'
 
 export const FORM_ITEMS = [
   {
-    question: 'Gender',
+    question: 'What gender is it?',
     responses: [
       { value: 'male', label: 'Male' },
       { value: 'female', label: 'Female' }
     ]
   },
   {
-    question: 'Pregnant',
-    responses: [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }]
+    question: 'What animal is it?',
+    responses: [
+      {
+        value: 'deer',
+        label: 'Deer',
+        img: require('../assets/FormAnswerImages/deer.jpg')
+      },
+      {
+        value: 'wildboar',
+        label: 'Wild Boar',
+        img: require('../assets/FormAnswerImages/wildboar.jpg')
+      }
+    ]
   }
 ]
 

@@ -1,4 +1,4 @@
-import FormItem from '../components/FormItem'
+import { FormItem, FormImgSlider } from '../components'
 import { useSaveHunt } from '../hooks'
 
 import React from 'react'
@@ -34,13 +34,16 @@ const FormScreen = ({ navigation }) => {
       <FlatList
         contentContainerStyle={styles.listContainer}
         data={FORM_ITEMS}
-        renderItem={({ item, index }) => (
-          <FormItem
-            question={item.question}
-            responses={item.responses}
-            index={index}
-          />
-        )}
+        renderItem={({ item, index }) => {
+          const FormType = item.responses[0].img ? FormImgSlider : FormItem
+          return (
+            <FormType
+              question={item.question}
+              responses={item.responses}
+              index={index}
+            />
+          )
+        }}
         keyExtractor={item => item.question}
       />
       <TouchableOpacity
