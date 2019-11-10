@@ -9,7 +9,9 @@ import {
   Animated,
   Image,
   Dimensions,
-  ScrollView
+  ScrollView,
+  View,
+  Text
 } from 'react-native'
 import { NavigationEvents } from 'react-navigation'
 import { Table, Row } from 'react-native-table-component'
@@ -26,6 +28,19 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
+  },
+  title: {
+    position: 'absolute',
+    // top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  titleText: {
+    fontSize: 50,
+    color: 'white'
   },
   imageWrapper: {
     position: 'absolute',
@@ -77,6 +92,9 @@ const HuntListScreen = ({ navigation }) => {
           // eslint-disable-next-line global-require
           source={require('../../assets/dear_background2.png')}
         />
+        <View style={styles.title}>
+          <Text style={styles.titleText}>獵物紀錄</Text>
+        </View>
       </Animated.View>
       <ScrollView
         style={styles.list}
@@ -88,9 +106,9 @@ const HuntListScreen = ({ navigation }) => {
         <Animated.View
           style={{
             flex: 1,
-            // height: 1000,
+            // minHeight: contentMarginTop,
             paddingTop: contentMarginTop,
-            paddingBottom: 50,
+            paddingBottom: 20,
             alignItems: 'center',
             justifyContent: 'center'
           }}
