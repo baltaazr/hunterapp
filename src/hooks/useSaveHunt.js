@@ -5,13 +5,15 @@ import LZString from 'lz-string'
 import { useContext } from 'react'
 
 export default () => {
-  const { createHunt } = useContext(HuntContext)
+  const { createHunt, fetchHunts } = useContext(HuntContext)
   const {
     state: { picture, location, weather, formInfo },
-    reset
+    reset,
+    setLoading
   } = useContext(PictureContext)
 
   const saveHunt = async () => {
+    setLoading(true)
     await createHunt(
       LZString.compressToUTF16(picture.base64),
       location,
@@ -19,7 +21,9 @@ export default () => {
       formInfo
     )
     reset()
+    await fetchHunts()
     navigate('HuntList')
+    setLoading(false)
   }
 
   return [saveHunt]

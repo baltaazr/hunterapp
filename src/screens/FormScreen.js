@@ -29,11 +29,19 @@ const styles = StyleSheet.create({
   img: { height: 200 }
 })
 
-const FormScreen = ({ navigation }) => {
+const FormScreen = () => {
   const [saveHunt] = useSaveHunt()
   const {
-    state: { picture }
+    state: { picture, loading }
   } = useContext(PictureContext)
+
+  if (loading || !picture) {
+    return (
+      <View>
+        <Text>LOADING!</Text>
+      </View>
+    )
+  }
 
   return (
     <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
@@ -55,7 +63,6 @@ const FormScreen = ({ navigation }) => {
       />
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('Camera')
           saveHunt()
         }}
       >

@@ -20,6 +20,8 @@ const pictureReducer = (state, action) => {
       const newFormInfo = [...state.formInfo]
       newFormInfo[action.payload.index] = action.payload.value
       return { ...state, formInfo: newFormInfo }
+    case 'set_loading':
+      return { ...state, loading: action.payload }
     default:
       return state
   }
@@ -37,14 +39,19 @@ const setFormInfo = dispatch => formInfo => {
   dispatch({ type: 'set_form_info', payload: formInfo })
 }
 
+const setLoading = dispatch => loading => {
+  dispatch({ type: 'set_loading', payload: loading })
+}
+
 // state contains list of hunts
 export const { Provider, Context } = createDataContext(
   pictureReducer,
-  { reset, setPictureData, setFormInfo },
+  { reset, setPictureData, setFormInfo, setLoading },
   {
     picture: null,
     location: null,
     weather: null,
-    formInfo: defaultFormInfo
+    formInfo: defaultFormInfo,
+    loading: false
   }
 )

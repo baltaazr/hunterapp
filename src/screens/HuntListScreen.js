@@ -13,7 +13,6 @@ import {
   View,
   Text
 } from 'react-native'
-import { NavigationEvents } from 'react-navigation'
 import { Table, Row } from 'react-native-table-component'
 import moment from 'moment'
 
@@ -68,7 +67,7 @@ const styles = StyleSheet.create({
 })
 
 const HuntListScreen = ({ navigation }) => {
-  const { state, fetchHunts } = useContext(HuntContext)
+  const { state } = useContext(HuntContext)
   const scrollY = useRef(new Animated.Value(0)).current
 
   const headerHeight = scrollY.interpolate({
@@ -85,7 +84,6 @@ const HuntListScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView forceInset={{ top: 'always' }} style={styles.safeArea}>
-      <NavigationEvents onWillFocus={fetchHunts} />
       <Animated.View style={{ ...styles.imageWrapper, height: headerHeight }}>
         <Image
           style={styles.image}
