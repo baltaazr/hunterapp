@@ -53,14 +53,13 @@ const styles = StyleSheet.create({
   list: {
     flex: 1,
     color: 'white',
-    paddingVertical: 20,
     backgroundColor: '#eeeeee'
   },
   headTable: {
     borderWidth: 1,
     borderColor: '#C1C0B9'
   },
-  header: { height: 50, backgroundColor: '#EEEEEE' },
+  header: { height: 50, backgroundColor: '#EEEEEE', marginTop: 10 },
   text: { textAlign: 'center', fontWeight: '100' },
   contentTable: { borderWidth: 1, borderColor: '#C1C0B9' },
   row: { height: 40, backgroundColor: '#FFB856' }
@@ -105,6 +104,7 @@ const HuntListScreen = ({ navigation }) => {
           style={{
             flex: 1,
             // minHeight: contentMarginTop,
+            paddingVertical: 20,
             paddingTop: contentMarginTop,
             alignItems: 'center',
             justifyContent: 'center'

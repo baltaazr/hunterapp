@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   // img: { height: 200 }
 })
 
-const FormImgSlider = ({ question, responses }) => {
+const FormImgSlider = ({ question, responses, index }) => {
   const { setFormInfo } = useContext(PictureContext)
 
   return (
@@ -54,9 +54,12 @@ const FormImgSlider = ({ question, responses }) => {
         <View style={styles.swiperInnerContainer}>
           <Swiper
             loop={false}
-            onIndexChanged={idxActive =>
-              setFormInfo({ idxActive, value: responses[idxActive].value })
-            }
+            onIndexChanged={idxActive => {
+              setFormInfo({
+                index,
+                value: responses[idxActive].value
+              })
+            }}
           >
             {responses.map(({ img, value, label }) => (
               <View style={styles.imgContainer} key={value}>

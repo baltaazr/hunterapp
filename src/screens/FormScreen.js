@@ -14,7 +14,8 @@ import {
   Animated,
   Platform,
   StatusBar,
-  Dimensions
+  Dimensions,
+  ActivityIndicator
 } from 'react-native'
 import { FORM_ITEMS } from 'config'
 import { AntDesign } from '@expo/vector-icons'
@@ -80,6 +81,17 @@ const styles = StyleSheet.create({
     fontSize: 50,
     color: 'white'
   },
+  formScreen: {
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+    zIndex: 100,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
+  },
   submitButton: {
     backgroundColor: 'transparent'
   },
@@ -116,16 +128,13 @@ const FormScreen = ({ navigation }) => {
     extrapolate: 'clamp'
   })
 
-  if (loading || !picture) {
-    return (
-      <View>
-        <Text>LOADING!</Text>
-      </View>
-    )
-  }
-
   return (
     <View style={styles.container}>
+      {(loading || !picture) && (
+        <View style={styles.formScreen}>
+          <ActivityIndicator size="large" color="#00ff00" />
+        </View>
+      )}
       <Animated.View style={{ ...styles.imageWrapper, height: headerHeight }}>
         <Image
           style={styles.image}
