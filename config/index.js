@@ -1,27 +1,32 @@
+import DEER_PIC from '../assets/FormAnswerImages/deer.jpg'
+import BOAR_PIC from '../assets/FormAnswerImages/wildboar.jpg'
+
 /* eslint-disable global-require */
 export const NGROK_ADDRESS = 'http://5a89552f.ngrok.io'
 
 export const FORM_ITEMS = [
   {
-    question: 'What animal is it?',
+    question: '什麼動物？',
     responses: [
       {
-        value: 'deer',
-        label: 'Deer',
-        img: require('../assets/FormAnswerImages/deer.jpg')
+        value: '鹿',
+        label: '鹿',
+        img: DEER_PIC
       },
       {
-        value: 'wildboar',
-        label: 'Wild Boar',
-        img: require('../assets/FormAnswerImages/wildboar.jpg')
+        value: '山豬',
+        label: '山豬',
+        img: BOAR_PIC
       }
     ]
   },
   {
-    question: 'What gender is it?',
+    question: '動物公母?',
     responses: [
-      { value: 'male', label: 'Male' },
-      { value: 'female', label: 'Female' }
+      // male
+      { value: '公', label: '公' },
+      // female
+      { value: '母', label: '母' }
     ]
   }
 ]

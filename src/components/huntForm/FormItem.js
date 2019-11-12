@@ -7,15 +7,17 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'gray',
+    justifyContent: 'flex-start',
+    // backgroundColor: 'gray',
     margin: 5
   },
   questionWrapper: {
     flex: 1
   },
   question: {
-    color: 'white',
-    fontSize: 20,
+    // color: 'white',
+    fontSize: 25,
+    fontWeight: '400',
     textAlign: 'center',
     textAlignVertical: 'center'
   },

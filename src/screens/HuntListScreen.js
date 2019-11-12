@@ -2,7 +2,6 @@ import { HuntContext } from '../context'
 
 import React, { useContext, useRef } from 'react'
 import {
-  SafeAreaView,
   StyleSheet,
   Platform,
   StatusBar,
@@ -26,7 +25,7 @@ const WIDTH_ARR = [width * 0.4, width * 0.28, width * 0.28]
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
+    marginTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
   },
   title: {
     position: 'absolute',
@@ -54,6 +53,7 @@ const styles = StyleSheet.create({
   list: {
     flex: 1,
     color: 'white',
+    paddingVertical: 20,
     backgroundColor: '#eeeeee'
   },
   headTable: {
@@ -83,7 +83,7 @@ const HuntListScreen = ({ navigation }) => {
   })
 
   return (
-    <SafeAreaView forceInset={{ top: 'always' }} style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <Animated.View style={{ ...styles.imageWrapper, height: headerHeight }}>
         <Image
           style={styles.image}
@@ -106,7 +106,6 @@ const HuntListScreen = ({ navigation }) => {
             flex: 1,
             // minHeight: contentMarginTop,
             paddingTop: contentMarginTop,
-            paddingBottom: 20,
             alignItems: 'center',
             justifyContent: 'center'
           }}
@@ -145,7 +144,7 @@ const HuntListScreen = ({ navigation }) => {
           </Table>
         </Animated.View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   )
 }
 

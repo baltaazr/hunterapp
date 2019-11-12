@@ -2,38 +2,119 @@ import { FormItem, FormImgSlider } from '../components'
 import { useSaveHunt } from '../hooks'
 import { PictureContext } from '../context'
 
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 import {
   StyleSheet,
   FlatList,
-  SafeAreaView,
   View,
   Text,
   TouchableOpacity,
-  Image
+  Image,
+  ScrollView,
+  Animated,
+  Platform,
+  StatusBar,
+  Dimensions
 } from 'react-native'
 import { FORM_ITEMS } from 'config'
+import { AntDesign } from '@expo/vector-icons'
+
+const WIDTH = Dimensions.get('window').width
+const HEIGHT = Dimensions.get('window').height
+
+const MIN_IMAGE_HEIGHT = 100
+const MAX_IMAGE_HEIGHT = 250
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: 'black' },
-  listContainer: {
+  container: {
+    flex: 1,
+    paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
+  },
+  innerContainer: {
+    flex: 1,
+    color: 'white',
+    backgroundColor: '#efefef'
+  },
+  imageWrapper: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    overflow: 'hidden',
+    alignItems: 'center',
+    zIndex: 1
+  },
+  image: {
     width: '100%',
+    height: '100%'
+  },
+  imgWrapper: {
+    flex: 1,
+    marginTop: 10,
+    alignItems: 'center'
+  },
+  img: {
+    width: WIDTH * 0.5,
+    height: HEIGHT * 0.5,
+    borderWidth: 5,
+    borderColor: '#DFDFDF'
+  },
+  listContainer: {
+    flex: 1,
+    // width: '100%',
     flexDirection: 'column'
     // alignItems: 'center'
+    // justifyContent: 'center'
+    // alignItems: 'center'
+  },
+  title: {
+    position: 'absolute',
+    // top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  titleText: {
+    fontSize: 50,
+    color: 'white'
   },
   submitButton: {
-    width: 100,
-    color: 'white',
-    backgroundColor: 'white'
+    backgroundColor: 'transparent'
   },
-  img: { height: 200 }
+  submitButtonContentWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginRight: 10
+  },
+  submitText: {
+    color: 'black',
+    textAlign: 'right',
+    marginRight: 5,
+    fontSize: 25
+  }
 })
 
-const FormScreen = () => {
+const FormScreen = ({ navigation }) => {
   const [saveHunt] = useSaveHunt()
   const {
     state: { picture, loading }
   } = useContext(PictureContext)
+  const scrollY = useRef(new Animated.Value(0)).current
+
+  const headerHeight = scrollY.interpolate({
+    inputRange: [0, MAX_IMAGE_HEIGHT - MIN_IMAGE_HEIGHT],
+    outputRange: [MAX_IMAGE_HEIGHT, MIN_IMAGE_HEIGHT],
+    extrapolate: 'clamp'
+  })
+
+  const contentMarginTop = scrollY.interpolate({
+    inputRange: [0, MAX_IMAGE_HEIGHT - MIN_IMAGE_HEIGHT],
+    outputRange: [MAX_IMAGE_HEIGHT, MAX_IMAGE_HEIGHT],
+    extrapolate: 'clamp'
+  })
 
   if (loading || !picture) {
     return (
@@ -44,33 +125,70 @@ const FormScreen = () => {
   }
 
   return (
-    <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
-      <Image source={{ uri: picture.uri }} style={styles.img} />
-      <FlatList
-        contentContainerStyle={styles.listContainer}
-        data={FORM_ITEMS}
-        renderItem={({ item, index }) => {
-          const FormType = item.responses[0].img ? FormImgSlider : FormItem
-          return (
-            <FormType
-              question={item.question}
-              responses={item.responses}
-              index={index}
-            />
-          )
-        }}
-        keyExtractor={item => item.question}
-      />
-      <TouchableOpacity
-        onPress={() => {
-          saveHunt()
-        }}
-      >
-        <View style={styles.submitButton}>
-          <Text>Submit</Text>
+    <View style={styles.container}>
+      <Animated.View style={{ ...styles.imageWrapper, height: headerHeight }}>
+        <Image
+          style={styles.image}
+          // eslint-disable-next-line global-require
+          source={require('../../assets/something_background.png')}
+        />
+        <View style={styles.title}>
+          <Text style={styles.titleText}>獵物資訊</Text>
         </View>
-      </TouchableOpacity>
-    </SafeAreaView>
+      </Animated.View>
+      <ScrollView
+        style={styles.innerContainer}
+        scrollEventThrottle={16}
+        onScroll={Animated.event([
+          {
+            nativeEvent: { contentOffset: { y: scrollY } }
+          }
+        ])}
+      >
+        <Animated.View
+          style={{
+            flex: 1,
+            paddingTop: contentMarginTop,
+            paddingBottom: 20,
+            // alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: 30
+          }}
+        >
+          <View style={styles.imgWrapper}>
+            <Image source={{ uri: picture.uri }} style={styles.img} />
+          </View>
+          <FlatList
+            contentContainerStyle={styles.listContainer}
+            data={FORM_ITEMS}
+            renderItem={({ item, index }) => {
+              const FormType = item.responses[0].img ? FormImgSlider : FormItem
+              return (
+                <FormType
+                  question={item.question}
+                  responses={item.responses}
+                  index={index}
+                />
+              )
+            }}
+            keyExtractor={item => item.question}
+          />
+
+          <View style={styles.submitButton}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Camera')
+                saveHunt()
+              }}
+              style={styles.submitButtonContentWrapper}
+            >
+              <Text style={styles.submitText}>傳送</Text>
+              <AntDesign name="checkcircle" color="#38F46B" size={40} />
+            </TouchableOpacity>
+          </View>
+        </Animated.View>
+      </ScrollView>
+    </View>
   )
 }
 
