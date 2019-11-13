@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const FormScreen = ({ navigation }) => {
+const FormScreen = () => {
   const [saveHunt] = useSaveHunt()
   const {
     state: { picture, loading }
@@ -128,13 +128,18 @@ const FormScreen = ({ navigation }) => {
     extrapolate: 'clamp'
   })
 
-  return (
-    <View style={styles.container}>
-      {(loading || !picture) && (
+  if (loading || !picture) {
+    return (
+      <View style={styles.container}>
         <View style={styles.formScreen}>
           <ActivityIndicator size="large" color="#00ff00" />
         </View>
-      )}
+      </View>
+    )
+  }
+
+  return (
+    <View style={styles.container}>
       <Animated.View style={{ ...styles.imageWrapper, height: headerHeight }}>
         <Image
           style={styles.image}
@@ -186,7 +191,6 @@ const FormScreen = ({ navigation }) => {
           <View style={styles.submitButton}>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('Camera')
                 saveHunt()
               }}
               style={styles.submitButtonContentWrapper}
