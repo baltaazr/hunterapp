@@ -16,7 +16,7 @@ router.get('/hunts', async (req, res) => {
 })
 
 router.post('/hunts', async (req, res) => {
-  const { picture, location, weather, formInfo } = req.body
+  const { picture, date, location, weather, formInfo } = req.body
   if (!picture || !formInfo) {
     return res
       .status(422)
@@ -26,7 +26,7 @@ router.post('/hunts', async (req, res) => {
   try {
     const hunt = new Hunt({
       picture,
-      Date: new Date(),
+      date,
       location,
       weather,
       formInfo,

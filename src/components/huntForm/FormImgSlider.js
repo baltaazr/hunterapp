@@ -1,7 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import { PictureContext } from '../../context'
-
-import React, { useContext } from 'react'
+import React from 'react'
 import { View, StyleSheet, Image, Text } from 'react-native'
 import Swiper from 'react-native-swiper'
 
@@ -44,34 +42,30 @@ const styles = StyleSheet.create({
   // img: { height: 200 }
 })
 
-const FormImgSlider = ({ question, responses, index }) => {
-  const { setFormInfo } = useContext(PictureContext)
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.question}>{question}</Text>
-      <View style={styles.swiperOuterContainer}>
-        <View style={styles.swiperInnerContainer}>
-          <Swiper
-            loop={false}
-            onIndexChanged={idxActive => {
-              setFormInfo({
-                index,
-                value: responses[idxActive].value
-              })
-            }}
-          >
-            {responses.map(({ img, value, label }) => (
-              <View style={styles.imgContainer} key={value}>
-                <Image source={img} style={styles.img} />
-                <Text style={styles.imgLabel}>{label}</Text>
-              </View>
-            ))}
-          </Swiper>
-        </View>
+const FormImgSlider = ({ question, responses, index, changeForm }) => (
+  <View style={styles.container}>
+    <Text style={styles.question}>{question}</Text>
+    <View style={styles.swiperOuterContainer}>
+      <View style={styles.swiperInnerContainer}>
+        <Swiper
+          loop={false}
+          onIndexChanged={idxActive => {
+            changeForm({
+              index,
+              value: responses[idxActive].value
+            })
+          }}
+        >
+          {responses.map(({ img, value, label }) => (
+            <View style={styles.imgContainer} key={value}>
+              <Image source={img} style={styles.img} />
+              <Text style={styles.imgLabel}>{label}</Text>
+            </View>
+          ))}
+        </Swiper>
       </View>
     </View>
-  )
-}
+  </View>
+)
 
 export default FormImgSlider

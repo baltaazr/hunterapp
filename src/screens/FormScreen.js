@@ -112,7 +112,8 @@ const styles = StyleSheet.create({
 const FormScreen = () => {
   const [saveHunt] = useSaveHunt()
   const {
-    state: { picture, loading }
+    state: { picture, loading, formInfo },
+    setFormInfo
   } = useContext(PictureContext)
   const scrollY = useRef(new Animated.Value(0)).current
 
@@ -127,6 +128,12 @@ const FormScreen = () => {
     outputRange: [MAX_IMAGE_HEIGHT, MAX_IMAGE_HEIGHT],
     extrapolate: 'clamp'
   })
+
+  const changeForm = (idx, val) => {
+    const newFormInfo = [...formInfo]
+    newFormInfo[idx] = val
+    setFormInfo(newFormInfo)
+  }
 
   if (loading || !picture) {
     return (
@@ -182,6 +189,7 @@ const FormScreen = () => {
                   question={item.question}
                   responses={item.responses}
                   index={index}
+                  changeForm={changeForm}
                 />
               )
             }}

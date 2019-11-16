@@ -26,10 +26,9 @@ const styles = StyleSheet.create({
   }
 })
 
-const FormItem = ({ question, responses, index }) => {
+const FormItem = ({ question, responses, index, changeForm }) => {
   const {
-    state: { formInfo },
-    setFormInfo
+    state: { formInfo }
   } = useContext(PictureContext)
 
   return (
@@ -40,7 +39,7 @@ const FormItem = ({ question, responses, index }) => {
       <View style={styles.pickerWrapper}>
         <Picker
           selectedValue={formInfo[index]}
-          onValueChange={value => setFormInfo({ index, value })}
+          onValueChange={value => changeForm({ index, value })}
         >
           {responses.map(item => (
             <Picker.Item

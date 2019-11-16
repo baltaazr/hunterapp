@@ -184,6 +184,7 @@ const CameraScreen = ({ navigation }) => {
       const weatherObj = weather.data[0]
       setPictureData({
         picture: pic,
+        date: new Date(),
         location,
         weather: {
           temperature: weatherObj.Temperature.Metric.Value,
@@ -194,6 +195,7 @@ const CameraScreen = ({ navigation }) => {
     } catch (e) {
       setPictureData({
         picture: pic,
+        date: new Date(),
         location,
         weather: {
           temperature: -1,

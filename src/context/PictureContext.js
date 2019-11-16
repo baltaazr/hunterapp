@@ -9,6 +9,7 @@ const pictureReducer = (state, action) => {
     case 'reset':
       return {
         picture: null,
+        date: null,
         location: null,
         weather: null,
         formInfo: defaultFormInfo
@@ -16,10 +17,7 @@ const pictureReducer = (state, action) => {
     case 'set_picture_data':
       return { ...action.payload, formInfo: defaultFormInfo }
     case 'set_form_info':
-      // eslint-disable-next-line no-case-declarations
-      const newFormInfo = [...state.formInfo]
-      newFormInfo[action.payload.index] = action.payload.value
-      return { ...state, formInfo: newFormInfo }
+      return { ...state, formInfo: action.payload }
     case 'set_loading':
       return { ...state, loading: action.payload }
     default:
@@ -49,6 +47,7 @@ export const { Provider, Context } = createDataContext(
   { reset, setPictureData, setFormInfo, setLoading },
   {
     picture: null,
+    date: null,
     location: null,
     weather: null,
     formInfo: defaultFormInfo,

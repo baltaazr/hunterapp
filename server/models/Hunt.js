@@ -30,7 +30,6 @@ const huntSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    default: new Date(),
     required: true
   },
   location: {

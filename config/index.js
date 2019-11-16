@@ -2,7 +2,7 @@ import DEER_PIC from '../assets/FormAnswerImages/deer.jpg'
 import BOAR_PIC from '../assets/FormAnswerImages/wildboar.jpg'
 
 /* eslint-disable global-require */
-export const NGROK_ADDRESS = 'http://23dea0fe.ngrok.io'
+export const NGROK_ADDRESS = 'http://ac9802e0.ngrok.io'
 
 export const FORM_ITEMS = [
   {
