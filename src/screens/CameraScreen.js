@@ -1,8 +1,7 @@
 import { PictureContext } from '../context'
-import { weatherApi } from '../api'
+import { useSnap, usePermissions } from '../hooks'
 
-import { weatherApiKey } from 'config'
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import {
   TouchableOpacity,
   Dimensions,
@@ -14,8 +13,6 @@ import {
   StatusBar,
   ImageBackground
 } from 'react-native'
-import * as Location from 'expo-location'
-import * as Permissions from 'expo-permissions'
 import { Camera } from 'expo-camera'
 import { NavigationEvents } from 'react-navigation'
 import { Ionicons, Entypo, MaterialIcons, AntDesign } from '@expo/vector-icons'
@@ -127,84 +124,14 @@ const styles = StyleSheet.create({
 let camera
 
 const CameraScreen = ({ navigation }) => {
-  const [perm, setPerm] = useState(null)
+  const [perm] = usePermissions()
+  const [snap] = useSnap()
   const [focus, setFocus] = useState(true)
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back)
   const {
     state: { picture },
-    setPictureData,
     reset
   } = useContext(PictureContext)
-
-  useEffect(() => {
-    const askForPerimissions = async () => {
-      const cameraPermission = await Permissions.askAsync(Permissions.CAMERA)
-      const locationPerimission = await Permissions.askAsync(
-        Permissions.LOCATION
-      )
-      if (
-        cameraPermission.status === 'granted' &&
-        locationPerimission.status === 'granted'
-      ) {
-        setPerm('granted')
-      } else {
-        setPerm('denied')
-      }
-    }
-
-    try {
-      askForPerimissions()
-    } catch (err) {
-      setPerm('denied')
-    }
-  }, [])
-
-  const snap = async () => {
-    const pic = await camera.takePictureAsync({ base64: true })
-    const location = await Location.getCurrentPositionAsync()
-    try {
-      const { data } = await weatherApi.get(
-        '/locations/v1/cities/geoposition/search',
-        {
-          params: {
-            apikey: weatherApiKey,
-            q: `${location.coords.latitude},${location.coords.longitude}`
-          }
-        }
-      )
-      const weather = await weatherApi.get(
-        `/currentconditions/v1/${data.Key}`,
-        {
-          params: {
-            apikey: weatherApiKey,
-            details: true
-          }
-        }
-      )
-      const weatherObj = weather.data[0]
-      setPictureData({
-        picture: pic,
-        date: new Date(),
-        location,
-        weather: {
-          temperature: weatherObj.Temperature.Metric.Value,
-          text: weatherObj.WeatherText,
-          humidity: weatherObj.RelativeHumidity
-        }
-      })
-    } catch (e) {
-      setPictureData({
-        picture: pic,
-        date: new Date(),
-        location,
-        weather: {
-          temperature: -1,
-          text: 'UNABLE TO GET WEATHER DATA',
-          humidity: -1
-        }
-      })
-    }
-  }
 
   return (
     <View style={styles.container}>
@@ -290,7 +217,11 @@ const CameraScreen = ({ navigation }) => {
                 </TouchableOpacity>
               </View>
               <View style={styles.cameraBottomMidComponents}>
-                <TouchableOpacity onPress={snap}>
+                <TouchableOpacity
+                  onPress={() => {
+                    snap(camera)
+                  }}
+                >
                   <View style={styles.takePicture} />
                 </TouchableOpacity>
               </View>

@@ -50,10 +50,7 @@ const FormImgSlider = ({ question, responses, index, changeForm }) => (
         <Swiper
           loop={false}
           onIndexChanged={idxActive => {
-            changeForm({
-              index,
-              value: responses[idxActive].value
-            })
+            changeForm(index, responses[idxActive].value)
           }}
         >
           {responses.map(({ img, value, label }) => (

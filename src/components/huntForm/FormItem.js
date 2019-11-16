@@ -39,7 +39,7 @@ const FormItem = ({ question, responses, index, changeForm }) => {
       <View style={styles.pickerWrapper}>
         <Picker
           selectedValue={formInfo[index]}
-          onValueChange={value => changeForm({ index, value })}
+          onValueChange={value => changeForm(index, value)}
         >
           {responses.map(item => (
             <Picker.Item
