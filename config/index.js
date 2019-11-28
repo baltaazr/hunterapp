@@ -9,23 +9,9 @@ import RAIN_PIC from '../assets/FormAnswerImages/WeatherIcons/rain.png'
 import SNOW_PIC from '../assets/FormAnswerImages/WeatherIcons/snow.png'
 
 /* eslint-disable global-require */
-export const NGROK_ADDRESS = 'http://f5ab5c72.ngrok.io'
+export const NGROK_ADDRESS = 'http://0ab54620.ngrok.io'
 
 export const FORM_ITEMS = [
-  {
-    question: '天空條件',
-    responses: [
-      { value: '明確', label: '明確', img: CLEAR_PIC },
-      { value: '局部陰天', label: '局部陰天', img: PARTLYCLOUDY_PIC },
-      { value: '多雲的', label: '多雲的', img: CLOUDY_PIC },
-      { value: '雨', label: '雨', img: RAIN_PIC },
-      { value: '雪', label: '雪', img: SNOW_PIC }
-    ]
-  },
-  {
-    question: '溫度',
-    responses: 'numeric'
-  },
   {
     question: '什麼動物？',
     responses: [
@@ -89,6 +75,20 @@ export const FORM_ITEMS = [
       { value: '被動物破壞的植物', label: '被動物破壞的植物' },
       { value: '過度放牧', label: '過度放牧' }
     ]
+  },
+  {
+    question: '天空條件',
+    responses: [
+      { value: '明確', label: '明確', img: CLEAR_PIC },
+      { value: '局部陰天', label: '局部陰天', img: PARTLYCLOUDY_PIC },
+      { value: '多雲的', label: '多雲的', img: CLOUDY_PIC },
+      { value: '雨', label: '雨', img: RAIN_PIC },
+      { value: '雪', label: '雪', img: SNOW_PIC }
+    ]
+  },
+  {
+    question: '溫度',
+    responses: 'numeric'
   },
   {
     question: '方法',

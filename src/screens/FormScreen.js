@@ -15,7 +15,8 @@ import {
   Platform,
   StatusBar,
   Dimensions,
-  ActivityIndicator
+  ActivityIndicator,
+  KeyboardAvoidingView
 } from 'react-native'
 import { FORM_ITEMS } from 'config'
 import { AntDesign } from '@expo/vector-icons'
@@ -147,7 +148,7 @@ const FormScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
       <Animated.View style={{ ...styles.imageWrapper, height: headerHeight }}>
         <Image
           style={styles.image}
@@ -217,7 +218,7 @@ const FormScreen = () => {
           </View>
         </Animated.View>
       </ScrollView>
-    </View>
+    </KeyboardAvoidingView>
   )
 }
 
