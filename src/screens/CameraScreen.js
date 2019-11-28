@@ -1,5 +1,5 @@
 import { PictureContext } from '../context'
-import { useSnap, usePermissions, useAddSave } from '../hooks'
+import { useSnap, usePermissions } from '../hooks'
 
 import React, { useState, useContext } from 'react'
 import {
@@ -126,7 +126,6 @@ let camera
 const CameraScreen = ({ navigation }) => {
   const [perm] = usePermissions()
   const [snap] = useSnap()
-  const [addSave] = useAddSave()
   const [focus, setFocus] = useState(true)
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back)
   const {
@@ -162,14 +161,7 @@ const CameraScreen = ({ navigation }) => {
               <View style={styles.pictureTopRightComponents} />
             </View>
             <View style={styles.pictureBottomElements}>
-              <View style={styles.pictureBottomLeftComponents}>
-                <TouchableOpacity
-                  style={styles.continueImage}
-                  onPress={addSave}
-                >
-                  <Ionicons name="md-send" color="cyan" size={40} />
-                </TouchableOpacity>
-              </View>
+              <View style={styles.pictureBottomLeftComponents} />
               <View style={styles.pictureBottomRightComponents}>
                 <TouchableOpacity
                   style={styles.continueImage}

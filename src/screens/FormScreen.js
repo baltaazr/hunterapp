@@ -1,4 +1,4 @@
-import { FormItem, FormImgSlider } from '../components'
+import { FormItem, FormImgSlider, FormInput } from '../components'
 import { useSaveHunt } from '../hooks'
 import { PictureContext } from '../context'
 
@@ -129,8 +129,9 @@ const FormScreen = () => {
     extrapolate: 'clamp'
   })
 
+  const newFormInfo = [...formInfo]
+
   const changeForm = (idx, val) => {
-    const newFormInfo = [...formInfo]
     newFormInfo[idx] = val
     setFormInfo(newFormInfo)
   }
@@ -186,7 +187,11 @@ const FormScreen = () => {
             contentContainerStyle={styles.listContainer}
             data={FORM_ITEMS}
             renderItem={({ item, index }) => {
-              const FormType = item.responses[0].img ? FormImgSlider : FormItem
+              const FormType = !Array.isArray(item.responses)
+                ? FormInput
+                : item.responses[0].img
+                ? FormImgSlider
+                : FormItem
               return (
                 <FormType
                   question={item.question}

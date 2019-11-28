@@ -2,7 +2,12 @@ import createDataContext from './createDataContext'
 
 import { FORM_ITEMS } from 'config'
 
-const defaultFormInfo = FORM_ITEMS.map(item => item.responses[0].value)
+const defaultFormInfo = FORM_ITEMS.map(item => {
+  if (Array.isArray(item.responses)) {
+    return item.responses[0].value
+  }
+  return ''
+})
 
 const pictureReducer = (state, action) => {
   switch (action.type) {

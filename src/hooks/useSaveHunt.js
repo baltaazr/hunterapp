@@ -23,7 +23,7 @@ export default () => {
     )
     reset()
     await fetchHunts()
-    navigate('HuntList')
+    navigate('Camera')
     setLoading(false)
   }
 
