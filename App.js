@@ -13,7 +13,8 @@ import {
   AuthProvider,
   HuntProvider,
   PictureProvider,
-  UserProvider
+  UserProvider,
+  SaveProvider
 } from './src/context'
 import { setNavigator } from './src/utils'
 
@@ -65,17 +66,19 @@ const switchNavigator = createSwitchNavigator({
 const App = createAppContainer(switchNavigator)
 
 export default () => (
-  <UserProvider>
-    <PictureProvider>
-      <HuntProvider>
-        <AuthProvider>
-          <App
-            ref={navigator => {
-              setNavigator(navigator)
-            }}
-          />
-        </AuthProvider>
-      </HuntProvider>
-    </PictureProvider>
-  </UserProvider>
+  <SaveProvider>
+    <UserProvider>
+      <PictureProvider>
+        <HuntProvider>
+          <AuthProvider>
+            <App
+              ref={navigator => {
+                setNavigator(navigator)
+              }}
+            />
+          </AuthProvider>
+        </HuntProvider>
+      </PictureProvider>
+    </UserProvider>
+  </SaveProvider>
 )

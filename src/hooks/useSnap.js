@@ -2,21 +2,21 @@ import { PictureContext } from '../context'
 import { weatherApi } from '../api'
 
 import * as Location from 'expo-location'
-import { weatherApiKey } from 'config'
+import { WEATHER_API_KEY } from 'config'
 import { useContext } from 'react'
 
 export default () => {
   const { setPictureData } = useContext(PictureContext)
 
   const snap = async camera => {
-    const pic = await camera.takePictureAsync({ base64: true })
+    const { base64 } = await camera.takePictureAsync({ base64: true })
     const location = await Location.getCurrentPositionAsync()
     try {
       const { data } = await weatherApi.get(
         '/locations/v1/cities/geoposition/search',
         {
           params: {
-            apikey: weatherApiKey,
+            apikey: WEATHER_API_KEY,
             q: `${location.coords.latitude},${location.coords.longitude}`
           }
         }
@@ -25,14 +25,14 @@ export default () => {
         `/currentconditions/v1/${data.Key}`,
         {
           params: {
-            apikey: weatherApiKey,
+            apikey: WEATHER_API_KEY,
             details: true
           }
         }
       )
       const weatherObj = weather.data[0]
       setPictureData({
-        picture: pic,
+        picture: base64,
         date: new Date(),
         location,
         weather: {
@@ -43,7 +43,7 @@ export default () => {
       })
     } catch (e) {
       setPictureData({
-        picture: pic,
+        picture: base64,
         date: new Date(),
         location,
         weather: {

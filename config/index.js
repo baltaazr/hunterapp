@@ -2,7 +2,7 @@ import DEER_PIC from '../assets/FormAnswerImages/deer.jpg'
 import BOAR_PIC from '../assets/FormAnswerImages/wildboar.jpg'
 
 /* eslint-disable global-require */
-export const NGROK_ADDRESS = 'http://4a6c1c43.ngrok.io'
+export const NGROK_ADDRESS = 'http://87b0a619.ngrok.io'
 
 export const FORM_ITEMS = [
   {
@@ -31,6 +31,6 @@ export const FORM_ITEMS = [
   }
 ]
 
-export const weatherApiKey = 'xYRO15hWiRFvncBTGXiCidA5M9M1rZng'
+export const WEATHER_API_KEY = 'xYRO15hWiRFvncBTGXiCidA5M9M1rZng'
 
 export const DRAWER_WIDTH = 150

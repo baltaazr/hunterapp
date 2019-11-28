@@ -2,6 +2,8 @@ import { hunterApi } from '../api'
 
 import createDataContext from './createDataContext'
 
+import LZString from 'lz-string'
+
 const huntReducer = (state, action) => {
   switch (action.type) {
     case 'fetch_hunts':
@@ -12,8 +14,12 @@ const huntReducer = (state, action) => {
 }
 
 const fetchHunts = dispatch => async () => {
-  const response = await hunterApi.get('/hunts')
-  dispatch({ type: 'fetch_hunts', payload: response.data })
+  const { data: compressedHunts } = await hunterApi.get('/hunts')
+  const hunts = compressedHunts.map(hunt => ({
+    ...hunt,
+    picture: LZString.decompressFromUTF16(hunt.picture)
+  }))
+  dispatch({ type: 'fetch_hunts', payload: hunts })
 }
 // eslint-disable-next-line no-unused-vars
 const createHunt = dispatch => async (
@@ -26,7 +32,6 @@ const createHunt = dispatch => async (
   await hunterApi.post('/hunts', { picture, date, location, weather, formInfo })
 }
 
-// state contains list of hunts
 export const { Provider, Context } = createDataContext(
   huntReducer,
   { fetchHunts, createHunt },

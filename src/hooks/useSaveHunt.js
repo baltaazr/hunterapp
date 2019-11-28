@@ -15,7 +15,7 @@ export default () => {
   const saveHunt = async () => {
     setLoading(true)
     await createHunt(
-      LZString.compressToUTF16(picture.base64),
+      LZString.compressToUTF16(picture),
       date,
       location,
       weather,

@@ -177,7 +177,10 @@ const FormScreen = () => {
           }}
         >
           <View style={styles.imgWrapper}>
-            <Image source={{ uri: picture.uri }} style={styles.img} />
+            <Image
+              source={{ uri: `data:image/png;base64,${picture}` }}
+              style={styles.img}
+            />
           </View>
           <FlatList
             contentContainerStyle={styles.listContainer}

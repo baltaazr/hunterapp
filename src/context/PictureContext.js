@@ -41,7 +41,6 @@ const setLoading = dispatch => loading => {
   dispatch({ type: 'set_loading', payload: loading })
 }
 
-// state contains list of hunts
 export const { Provider, Context } = createDataContext(
   pictureReducer,
   { reset, setPictureData, setFormInfo, setLoading },

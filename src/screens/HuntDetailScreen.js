@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { HuntContext } from '../context'
 
-import LZString from 'lz-string'
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { StyleSheet, Text, Image, FlatList } from 'react-native'
 import { FORM_ITEMS } from 'config'
 import MapView, { Marker } from 'react-native-maps'
@@ -25,16 +24,10 @@ const HuntDetailScreen = ({ navigation }) => {
 
   const initialCoords = hunt.location.coords
 
-  const [picture, setPicture] = useState('')
-
-  useEffect(() => {
-    setPicture(LZString.decompressFromUTF16(hunt.picture))
-  }, [])
-
   return (
     <>
       <Image
-        source={{ uri: `data:image/png;base64,${picture}` }}
+        source={{ uri: `data:image/png;base64,${hunt.picture}` }}
         style={styles.img}
       />
       <MapView

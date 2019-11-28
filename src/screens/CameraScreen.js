@@ -1,5 +1,5 @@
 import { PictureContext } from '../context'
-import { useSnap, usePermissions } from '../hooks'
+import { useSnap, usePermissions, useAddSave } from '../hooks'
 
 import React, { useState, useContext } from 'react'
 import {
@@ -126,6 +126,7 @@ let camera
 const CameraScreen = ({ navigation }) => {
   const [perm] = usePermissions()
   const [snap] = useSnap()
+  const [addSave] = useAddSave()
   const [focus, setFocus] = useState(true)
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back)
   const {
@@ -146,7 +147,7 @@ const CameraScreen = ({ navigation }) => {
       />
       {picture ? (
         <ImageBackground
-          source={{ uri: picture.uri }}
+          source={{ uri: `data:image/png;base64,${picture}` }}
           style={styles.background}
         >
           <SafeAreaView
@@ -154,17 +155,21 @@ const CameraScreen = ({ navigation }) => {
           >
             <View style={styles.pictureTopElements}>
               <View style={styles.pictureTopLeftComponents}>
-                <TouchableOpacity
-                  style={styles.deleteImage}
-                  onPress={() => reset()}
-                >
+                <TouchableOpacity style={styles.deleteImage} onPress={reset}>
                   <Entypo name="cross" color="white" size={40} />
                 </TouchableOpacity>
               </View>
               <View style={styles.pictureTopRightComponents} />
             </View>
             <View style={styles.pictureBottomElements}>
-              <View style={styles.pictureBottomLeftComponents} />
+              <View style={styles.pictureBottomLeftComponents}>
+                <TouchableOpacity
+                  style={styles.continueImage}
+                  onPress={addSave}
+                >
+                  <Ionicons name="md-send" color="cyan" size={40} />
+                </TouchableOpacity>
+              </View>
               <View style={styles.pictureBottomRightComponents}>
                 <TouchableOpacity
                   style={styles.continueImage}
