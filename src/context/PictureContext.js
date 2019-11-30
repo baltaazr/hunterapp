@@ -17,7 +17,8 @@ const pictureReducer = (state, action) => {
         date: null,
         location: null,
         weather: null,
-        formInfo: defaultFormInfo
+        formInfo: defaultFormInfo,
+        loading: false
       }
     case 'set_picture_data':
       return { ...action.payload, formInfo: defaultFormInfo }

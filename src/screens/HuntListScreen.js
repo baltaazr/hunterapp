@@ -10,7 +10,8 @@ import {
   Dimensions,
   ScrollView,
   View,
-  Text
+  Text,
+  ActivityIndicator
 } from 'react-native'
 import { Table, Row } from 'react-native-table-component'
 import moment from 'moment'
@@ -62,11 +63,24 @@ const styles = StyleSheet.create({
   header: { height: 50, backgroundColor: '#EEEEEE', marginTop: 10 },
   text: { textAlign: 'center', fontWeight: '100' },
   contentTable: { borderWidth: 1, borderColor: '#C1C0B9' },
-  row: { height: 40, backgroundColor: '#FFB856' }
+  row: { height: 40, backgroundColor: '#FFB856' },
+  loadingScreen: {
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+    zIndex: 100,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
+  }
 })
 
 const HuntListScreen = ({ navigation }) => {
-  const { state } = useContext(HuntContext)
+  const {
+    state: { hunts, loading }
+  } = useContext(HuntContext)
   const scrollY = useRef(new Animated.Value(0)).current
 
   const headerHeight = scrollY.interpolate({
@@ -80,6 +94,16 @@ const HuntListScreen = ({ navigation }) => {
     outputRange: [MAX_IMAGE_HEIGHT, MAX_IMAGE_HEIGHT],
     extrapolate: 'clamp'
   })
+
+  if (loading) {
+    return (
+      <View style={styles.safeArea}>
+        <View style={styles.loadingScreen}>
+          <ActivityIndicator size="large" color="#00ff00" />
+        </View>
+      </View>
+    )
+  }
 
   return (
     <View style={styles.safeArea}>
@@ -119,7 +143,7 @@ const HuntListScreen = ({ navigation }) => {
             />
           </Table>
           <Table borderStyle={styles.contentTable}>
-            {state.map((data, index) => {
+            {hunts.map((data, index) => {
               const dateMoment = moment(data.date)
               return (
                 <Row

@@ -1,11 +1,14 @@
 import { HuntContext, PictureContext } from '../context'
 import { navigate } from '../utils/navigationRef'
 
-import LZString from 'lz-string'
 import { useContext } from 'react'
 
 export default () => {
-  const { createHunt, fetchHunts } = useContext(HuntContext)
+  const {
+    state: { loading },
+    createHunt,
+    fetchHunts
+  } = useContext(HuntContext)
   const {
     state: { picture, date, location, weather, formInfo },
     reset,
@@ -14,17 +17,12 @@ export default () => {
 
   const saveHunt = async () => {
     setLoading(true)
-    await createHunt(
-      LZString.compressToUTF16(picture),
-      date,
-      location,
-      weather,
-      formInfo
-    )
-    reset()
-    await fetchHunts()
+    await createHunt(picture, date, location, weather, formInfo)
     navigate('Camera')
-    setLoading(false)
+    reset()
+    if (!loading) {
+      await fetchHunts()
+    }
   }
 
   return [saveHunt]

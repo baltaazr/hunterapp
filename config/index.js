@@ -9,7 +9,7 @@ import RAIN_PIC from '../assets/FormAnswerImages/WeatherIcons/rain.png'
 import SNOW_PIC from '../assets/FormAnswerImages/WeatherIcons/snow.png'
 
 /* eslint-disable global-require */
-export const NGROK_ADDRESS = 'http://0ab54620.ngrok.io'
+export const NGROK_ADDRESS = 'http://a48af251.ngrok.io'
 
 export const FORM_ITEMS = [
   {
@@ -48,11 +48,18 @@ export const FORM_ITEMS = [
   },
   {
     question: '什麼年齡?',
-    responses: 'numeric'
+    responses: [
+      { value: 'infant', label: 'infant' },
+      { value: 'adult', label: 'adult' }
+    ]
   },
   {
     question: '孕',
-    responses: [{ value: '是', label: '是' }, { value: '沒有', label: '沒有' }]
+    responses: [
+      { value: 'pregant', label: 'pregant' },
+      { value: 'nursing', label: 'nursing' },
+      { value: '沒有', label: '沒有' }
+    ]
   },
   {
     question: '動物狀況',

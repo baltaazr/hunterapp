@@ -17,10 +17,12 @@ const styles = StyleSheet.create({
 })
 
 const HuntDetailScreen = ({ navigation }) => {
-  const { state } = useContext(HuntContext)
+  const {
+    state: { hunts }
+  } = useContext(HuntContext)
   const _id = navigation.getParam('_id')
 
-  const hunt = state.find(t => t._id === _id)
+  const hunt = hunts.find(t => t._id === _id)
 
   const initialCoords = hunt.location.coords
 

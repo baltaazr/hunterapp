@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
     color: 'white'
   },
-  formScreen: {
+  loadingScreen: {
     position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
@@ -137,10 +137,10 @@ const FormScreen = () => {
     setFormInfo(newFormInfo)
   }
 
-  if (loading || !picture) {
+  if (loading) {
     return (
       <View style={styles.container}>
-        <View style={styles.formScreen}>
+        <View style={styles.loadingScreen}>
           <ActivityIndicator size="large" color="#00ff00" />
         </View>
       </View>
