@@ -6,7 +6,7 @@ import {
   ResolveAuthScreen,
   SigninScreen,
   SignupScreen,
-  InfoScreen
+  SaveListScreen
 } from './src/screens'
 import { Drawer } from './src/components'
 import {
@@ -33,18 +33,31 @@ const switchNavigator = createSwitchNavigator({
   }),
   mainFlow: createMaterialTopTabNavigator(
     {
-      Info: InfoScreen,
-      MainScreenFlow: createDrawerNavigator(
+      SaveList: SaveListScreen,
+      HuntRecordFlow: createStackNavigator(
         {
-          HuntRecordFlow: createStackNavigator({
-            Camera: CameraScreen,
-            Form: FormScreen
-          })
+          DrawerFlow: createDrawerNavigator(
+            {
+              Camera: CameraScreen
+            },
+            {
+              contentComponent: Drawer,
+              drawerWidth: DRAWER_WIDTH,
+              drawerBackgroundColor: 'transparent'
+            }
+          ),
+          Form: FormScreen
         },
         {
-          contentComponent: Drawer,
-          drawerWidth: DRAWER_WIDTH,
-          drawerBackgroundColor: 'transparent'
+          headerMode: 'none',
+          navigationOptions: ({ navigation }) => {
+            const { routeName } = navigation.state.routes[
+              navigation.state.index
+            ]
+
+            if (routeName === 'Form') return { swipeEnabled: false }
+            return { swipeEnabled: true }
+          }
         }
       ),
       HuntListFlow: createStackNavigator({
@@ -58,7 +71,8 @@ const switchNavigator = createSwitchNavigator({
         showLabel: false,
         showIcon: false,
         style: { height: 0 }
-      }
+      },
+      swipeEnabled: true
     }
   )
 })

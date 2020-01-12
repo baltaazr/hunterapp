@@ -13,6 +13,7 @@ const pictureReducer = (state, action) => {
   switch (action.type) {
     case 'reset':
       return {
+        uri: null,
         picture: null,
         date: null,
         location: null,
@@ -51,6 +52,7 @@ export const { Provider, Context } = createDataContext(
   pictureReducer,
   { reset, setPictureData, setFormInfo, setLoading },
   {
+    uri: null,
     picture: null,
     date: null,
     location: null,

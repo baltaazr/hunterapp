@@ -1,5 +1,5 @@
-import { PictureContext } from '../context'
-import { useSnap, usePermissions } from '../hooks'
+import { PictureContext, SaveContext } from '../context'
+import { useSnap, useAddSave, usePermissions } from '../hooks'
 
 import React, { useState, useContext } from 'react'
 import {
@@ -96,7 +96,10 @@ const styles = StyleSheet.create({
     padding: 20
   },
   pictureBottomLeftComponents: {
-    flex: 5
+    flex: 5,
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    padding: 20
   },
   takePicture: {
     borderRadius:
@@ -126,12 +129,17 @@ let camera
 const CameraScreen = ({ navigation }) => {
   const [perm] = usePermissions()
   const [snap] = useSnap()
+  const [addSave] = useAddSave()
   const [focus, setFocus] = useState(true)
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back)
   const {
     state: { picture },
     reset
   } = useContext(PictureContext)
+  const {
+    state: { idxActive },
+    setActiveSave
+  } = useContext(SaveContext)
 
   return (
     <View style={styles.container}>
@@ -154,14 +162,29 @@ const CameraScreen = ({ navigation }) => {
           >
             <View style={styles.pictureTopElements}>
               <View style={styles.pictureTopLeftComponents}>
-                <TouchableOpacity style={styles.deleteImage} onPress={reset}>
+                <TouchableOpacity
+                  style={styles.deleteImage}
+                  onPress={() => {
+                    reset()
+                    setActiveSave(-1)
+                  }}
+                >
                   <Entypo name="cross" color="white" size={40} />
                 </TouchableOpacity>
               </View>
               <View style={styles.pictureTopRightComponents} />
             </View>
             <View style={styles.pictureBottomElements}>
-              <View style={styles.pictureBottomLeftComponents} />
+              <View style={styles.pictureBottomLeftComponents}>
+                {idxActive === -1 ? (
+                  <TouchableOpacity
+                    style={styles.deleteImage}
+                    onPress={addSave}
+                  >
+                    <Entypo name="download" color="white" size={40} />
+                  </TouchableOpacity>
+                ) : null}
+              </View>
               <View style={styles.pictureBottomRightComponents}>
                 <TouchableOpacity
                   style={styles.continueImage}

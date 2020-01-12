@@ -13,7 +13,7 @@ export default () => {
   } = useContext(PictureContext)
 
   const snap = async camera => {
-    const { base64 } = await camera.takePictureAsync({ base64: true })
+    const { uri, base64 } = await camera.takePictureAsync({ base64: true })
     const location = await Location.getCurrentPositionAsync()
     try {
       const { data } = await weatherApi.get(
@@ -37,6 +37,7 @@ export default () => {
       )
       const weatherObj = weather.data[0]
       setPictureData({
+        uri,
         picture: base64,
         date: new Date(),
         location,

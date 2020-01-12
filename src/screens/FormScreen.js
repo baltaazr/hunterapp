@@ -222,8 +222,4 @@ const FormScreen = () => {
   )
 }
 
-FormScreen.navigationOptions = {
-  header: null
-}
-
 export default FormScreen
