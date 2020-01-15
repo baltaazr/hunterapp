@@ -1,5 +1,4 @@
-import { SaveContext } from '../context'
-import { useActivateSave } from '../hooks'
+import { SaveContext, PictureContext } from '../context'
 
 import React, { useContext } from 'react'
 import {
@@ -14,12 +13,19 @@ const styles = StyleSheet.create({
   img: { height: 200 }
 })
 
-const SaveList = () => {
+const SaveList = ({ navigation }) => {
+  const { setPictureData } = useContext(PictureContext)
+
   const {
-    state: { saveList }
+    state: { saveList },
+    setActiveSave
   } = useContext(SaveContext)
 
-  const [activateSave] = useActivateSave()
+  const activateSave = idx => {
+    setPictureData(saveList[idx])
+    setActiveSave(idx)
+    navigation.navigate('Camera')
+  }
 
   return (
     <>
