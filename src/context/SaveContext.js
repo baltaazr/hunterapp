@@ -6,7 +6,7 @@ import { AsyncStorage } from 'react-native'
 const saveReducer = (state, action) => {
   switch (action.type) {
     case 'set_saves':
-      return { saveList: action.payload, idxActive: -1 }
+      return { saveList: action.payload }
     case 'set_active_save':
       return { ...state, idxActive: action.payload }
     default:
@@ -20,13 +20,17 @@ const fetchSaves = dispatch => async () => {
     const saves = []
     for (let i = 0; i < savesInfo.length; i++) {
       const save = savesInfo[i]
-      saves.push({
-        ...save,
-        // eslint-disable-next-line no-await-in-loop
-        picture: await FileSystem.readAsStringAsync(save.uri, {
-          encoding: FileSystem.EncodingType.Base64
+      try {
+        saves.push({
+          ...save,
+          // eslint-disable-next-line no-await-in-loop
+          picture: await FileSystem.readAsStringAsync(save.uri, {
+            encoding: FileSystem.EncodingType.Base64
+          })
         })
-      })
+      } catch (error) {
+        console.log(error)
+      }
     }
     dispatch({ type: 'set_saves', payload: saves })
   }

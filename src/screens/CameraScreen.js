@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   pictureTopRightComponents: {
-    flex: 5
+    flex: 5,
+    padding: 20
   },
   pictureTopLeftComponents: {
     flex: 5,
@@ -137,8 +138,9 @@ const CameraScreen = ({ navigation }) => {
     reset
   } = useContext(PictureContext)
   const {
-    state: { idxActive },
-    setActiveSave
+    state: { idxActive, saveList },
+    setActiveSave,
+    setSaves
   } = useContext(SaveContext)
 
   return (
@@ -172,7 +174,23 @@ const CameraScreen = ({ navigation }) => {
                   <Entypo name="cross" color="white" size={40} />
                 </TouchableOpacity>
               </View>
-              <View style={styles.pictureTopRightComponents} />
+              <View style={styles.pictureTopRightComponents}>
+                {idxActive !== -1 ? (
+                  <TouchableOpacity
+                    style={styles.continueImage}
+                    onPress={() => {
+                      const newSaveList = saveList.filter(
+                        (save, idx) => idx !== idxActive
+                      )
+                      setSaves(newSaveList)
+                      reset()
+                      setActiveSave(-1)
+                    }}
+                  >
+                    <Entypo name="trash" color="white" size={40} />
+                  </TouchableOpacity>
+                ) : null}
+              </View>
             </View>
             <View style={styles.pictureBottomElements}>
               <View style={styles.pictureBottomLeftComponents}>
@@ -192,7 +210,7 @@ const CameraScreen = ({ navigation }) => {
                     navigation.navigate('Form')
                   }}
                 >
-                  <Ionicons name="md-send" color="cyan" size={40} />
+                  <AntDesign name="checkcircle" color="#38F46B" size={40} />
                 </TouchableOpacity>
               </View>
             </View>

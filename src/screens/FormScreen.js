@@ -1,6 +1,6 @@
 import { FormItem, FormImgSlider, FormInput } from '../components'
 import { useSaveHunt } from '../hooks'
-import { PictureContext } from '../context'
+import { PictureContext, SaveContext } from '../context'
 
 import React, { useContext, useRef } from 'react'
 import {
@@ -19,7 +19,7 @@ import {
   KeyboardAvoidingView
 } from 'react-native'
 import { FORM_ITEMS } from 'config'
-import { AntDesign } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
 
 const WIDTH = Dimensions.get('window').width
 const HEIGHT = Dimensions.get('window').height
@@ -116,6 +116,11 @@ const FormScreen = () => {
     state: { picture, loading, formInfo },
     setFormInfo
   } = useContext(PictureContext)
+  const {
+    state: { saveList, idxActive },
+    setSaves
+  } = useContext(SaveContext)
+
   const scrollY = useRef(new Animated.Value(0)).current
 
   const headerHeight = scrollY.interpolate({
@@ -131,10 +136,15 @@ const FormScreen = () => {
   })
 
   const newFormInfo = [...formInfo]
+  const newSaveList = [...saveList]
 
-  const changeForm = (idx, val) => {
+  const changeForm = async (idx, val) => {
     newFormInfo[idx] = val
     setFormInfo(newFormInfo)
+    if (idxActive !== -1) {
+      newSaveList[idxActive].formInfo[idx] = val
+      await setSaves(newSaveList)
+    }
   }
 
   if (loading) {
@@ -213,7 +223,7 @@ const FormScreen = () => {
               style={styles.submitButtonContentWrapper}
             >
               <Text style={styles.submitText}>傳送</Text>
-              <AntDesign name="checkcircle" color="#38F46B" size={40} />
+              <Ionicons name="md-send" color="cyan" size={40} />
             </TouchableOpacity>
           </View>
         </Animated.View>

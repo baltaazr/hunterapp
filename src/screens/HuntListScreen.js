@@ -13,6 +13,7 @@ import {
   Text,
   ActivityIndicator
 } from 'react-native'
+import { FORM_ITEMS } from 'config'
 import { Table, Row } from 'react-native-table-component'
 import moment from 'moment'
 
@@ -145,14 +146,26 @@ const HuntListScreen = ({ navigation }) => {
           <Table borderStyle={styles.contentTable}>
             {hunts.map((data, index) => {
               const dateMoment = moment(data.date)
+              const species =
+                FORM_ITEMS[0].responses[
+                  FORM_ITEMS[0].responses
+                    .map(e => e.value)
+                    .indexOf(data.formInfo[0])
+                ].label
+              const gender =
+                FORM_ITEMS[1].responses[
+                  FORM_ITEMS[1].responses
+                    .map(e => e.value)
+                    .indexOf(data.formInfo[1])
+                ].label
               return (
                 <Row
                   widthArr={WIDTH_ARR}
                   key={data._id}
                   data={[
                     `${dateMoment.format('L')} ${dateMoment.format('LT')}`,
-                    data.formInfo[0],
-                    data.formInfo[1]
+                    species,
+                    gender
                   ]}
                   style={[
                     styles.row,
