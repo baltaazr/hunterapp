@@ -1,5 +1,5 @@
 import { PictureContext, SaveContext } from '../context'
-import { useSnap, useAddSave, usePermissions } from '../hooks'
+import { useSnap, useAddSave, usePermissions, useDeleteSave } from '../hooks'
 
 import React, { useState, useContext } from 'react'
 import {
@@ -131,6 +131,7 @@ const CameraScreen = ({ navigation }) => {
   const [perm] = usePermissions()
   const [snap] = useSnap()
   const [addSave] = useAddSave()
+  const [deleteSave] = useDeleteSave()
   const [focus, setFocus] = useState(true)
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back)
   const {
@@ -138,9 +139,8 @@ const CameraScreen = ({ navigation }) => {
     reset
   } = useContext(PictureContext)
   const {
-    state: { idxActive, saveList },
-    setActiveSave,
-    setSaves
+    state: { idxActive },
+    setActiveSave
   } = useContext(SaveContext)
 
   return (
@@ -178,13 +178,9 @@ const CameraScreen = ({ navigation }) => {
                 {idxActive !== -1 ? (
                   <TouchableOpacity
                     style={styles.continueImage}
-                    onPress={() => {
-                      const newSaveList = saveList.filter(
-                        (save, idx) => idx !== idxActive
-                      )
-                      setSaves(newSaveList)
+                    onPress={async () => {
+                      deleteSave()
                       reset()
-                      setActiveSave(-1)
                     }}
                   >
                     <Entypo name="trash" color="white" size={40} />
