@@ -1,5 +1,5 @@
 import { PictureContext, SaveContext } from '../context'
-import { useSnap, useAddSave, usePermissions, useDeleteSave } from '../hooks'
+import { useSnap, useAddSave, usePermissions } from '../hooks'
 
 import React, { useState, useContext } from 'react'
 import {
@@ -16,6 +16,7 @@ import {
 import { Camera } from 'expo-camera'
 import { NavigationEvents } from 'react-navigation'
 import { Ionicons, Entypo, MaterialIcons, AntDesign } from '@expo/vector-icons'
+import * as FileSystem from 'expo-file-system'
 
 const takePicButtonWidth = Dimensions.get('window').width * 0.15
 const styles = StyleSheet.create({
@@ -131,15 +132,15 @@ const CameraScreen = ({ navigation }) => {
   const [perm] = usePermissions()
   const [snap] = useSnap()
   const [addSave] = useAddSave()
-  const [deleteSave] = useDeleteSave()
   const [focus, setFocus] = useState(true)
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back)
   const {
-    state: { picture },
+    state: { uri, picture },
     reset
   } = useContext(PictureContext)
   const {
-    state: { idxActive },
+    state: { saveList, idxActive },
+    setSaves,
     setActiveSave
   } = useContext(SaveContext)
 
@@ -179,7 +180,12 @@ const CameraScreen = ({ navigation }) => {
                   <TouchableOpacity
                     style={styles.continueImage}
                     onPress={async () => {
-                      deleteSave()
+                      const newSaveList = saveList.filter(
+                        (el, i) => idxActive !== i
+                      )
+                      setSaves(newSaveList)
+                      await FileSystem.deleteAsync(uri)
+                      setActiveSave(-1)
                       reset()
                     }}
                   >

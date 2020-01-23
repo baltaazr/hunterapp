@@ -6,7 +6,7 @@ import { AsyncStorage } from 'react-native'
 const saveReducer = (state, action) => {
   switch (action.type) {
     case 'set_saves':
-      return { saveList: action.payload }
+      return { ...state, saveList: action.payload }
     case 'set_active_save':
       return { ...state, idxActive: action.payload }
     default:
@@ -46,6 +46,7 @@ const setSaves = dispatch => async saves => {
 }
 
 const setActiveSave = dispatch => idx => {
+  console.log(idx)
   dispatch({ type: 'set_active_save', payload: idx })
 }
 

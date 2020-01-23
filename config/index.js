@@ -9,7 +9,7 @@ import RAIN_PIC from '../assets/FormAnswerImages/WeatherIcons/rain.png'
 import SNOW_PIC from '../assets/FormAnswerImages/WeatherIcons/snow.png'
 
 /* eslint-disable global-require */
-export const NGROK_ADDRESS = 'http://6f954722.ngrok.io'
+export const NGROK_ADDRESS = 'http://99c48a38.ngrok.io'
 
 export const FORM_ITEMS = [
   {
