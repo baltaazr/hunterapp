@@ -52,24 +52,24 @@ export default () => {
       // indices for sky condition and temperature is 6 and 7
       // http://apidev.accuweather.com/developers/weatherIcons
       if (weatherNum <= 3 || (weatherNum >= 33 && weatherNum <= 35)) {
-        newFormInfo[6] = '明確'
+        newFormInfo[6] = 'clear'
       } else if (
         (weatherNum >= 4 && weatherNum <= 6) ||
         (weatherNum >= 36 && weatherNum <= 38)
       ) {
-        newFormInfo[6] = '局部陰天'
+        newFormInfo[6] = 'partlycloudy'
       } else if (weatherNum >= 7 && weatherNum <= 11) {
-        newFormInfo[6] = '多雲的'
+        newFormInfo[6] = 'cloudy'
       } else if (
         (weatherNum >= 12 && weatherNum <= 18) ||
         (weatherNum >= 39 && weatherNum <= 42)
       ) {
-        newFormInfo[6] = '雨'
+        newFormInfo[6] = 'rain'
       } else if (
         (weatherNum >= 19 && weatherNum <= 29) ||
         (weatherNum >= 43 && weatherNum <= 44)
       ) {
-        newFormInfo[6] = '雪'
+        newFormInfo[6] = 'rain'
       }
       newFormInfo[7] = weatherObj.Temperature.Metric.Value.toString()
       setFormInfo(newFormInfo)

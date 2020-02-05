@@ -46,7 +46,6 @@ const setSaves = dispatch => async saves => {
 }
 
 const setActiveSave = dispatch => idx => {
-  console.log(idx)
   dispatch({ type: 'set_active_save', payload: idx })
 }
 
